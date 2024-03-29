@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/Users/linus/Documents/Working Stuff/Git Hub/EFREI_git/CDataFrame/build",
+  "command": "C:\\MinGW\\bin\\gcc.exe   -g -o CMakeFiles\\CDataFrame.dir\\main.c.obj -c \"C:\\Users\\linus\\Documents\\Working Stuff\\Git Hub\\EFREI_git\\CDataFrame\\main.c\"",
+  "file": "C:/Users/linus/Documents/Working Stuff/Git Hub/EFREI_git/CDataFrame/main.c",
+  "output": "CMakeFiles/CDataFrame.dir/main.c.obj"
+},
+{
+  "directory": "C:/Users/linus/Documents/Working Stuff/Git Hub/EFREI_git/CDataFrame/build",
+  "command": "C:\\MinGW\\bin\\gcc.exe   -g -o CMakeFiles\\CDataFrame.dir\\column.c.obj -c \"C:\\Users\\linus\\Documents\\Working Stuff\\Git Hub\\EFREI_git\\CDataFrame\\column.c\"",
+  "file": "C:/Users/linus/Documents/Working Stuff/Git Hub/EFREI_git/CDataFrame/column.c",
+  "output": "CMakeFiles/CDataFrame.dir/column.c.obj"
+}
+]
