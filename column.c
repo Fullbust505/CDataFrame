@@ -1,4 +1,6 @@
 #include "column.h"
+#include <stdio.h>
+#include <stdio.h>
 
 enum enum_type{   
     /*Types for the columns*/
@@ -20,7 +22,10 @@ typedef union column_type COL_TYPE ;
 
 
 struct column {
-    /*Structure of the columns*/
+    /**
+     * Structure of the columns
+     * 
+     */
     char *title;
     unsigned int size; //logical size
     unsigned int max_size; //physical size
@@ -31,14 +36,40 @@ struct column {
 typedef struct column COLUMN;
 
 COLUMN *create_column(ENUM_TYPE type, char *title){
+    /**
+     * Creates a new column for a dataframe that will store the titles, types, sizes and indexes.
+     * 
+     */
     COLUMN* new_col = (COLUMN*) malloc(sizeof(COLUMN));
     *new_col->title = *title;
     new_col->size = 0;
     new_col->max_size = 256;
     new_col->column_type = type;
-    //**new_col->data = ;
+    new_col->data = (COL_TYPE**) malloc(new_col->max_size*sizeof(COL_TYPE));
+    new_col->index = (unsigned long long int*) malloc(new_col->size*sizeof(unsigned long long int));
 
-
+    if (new_col == NULL){
+        printf("Memory not allocated .");
+        return NULL;
+    }
     return new_col;
+
 }
 
+int insert_value(COLUMN *col, void *value){
+    /**
+     * Inserts a value of void type in a column.
+     * 
+     */
+    // Reallocation of the memory, in case there's not enough
+    if (col->size == col->max_size){
+        col->max_size += 256;
+        col = (COLUMN*) realloc(col, col->max_size*sizeof(col->column_type));
+    }
+    //COL_TYPE temp = *value;
+    col->data[col->size] = *value;
+    col->size += 1;
+    
+    if (col->data[col->size-1] == NULL) return 0;
+    else return 1;
+}
