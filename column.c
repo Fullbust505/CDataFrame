@@ -1,6 +1,6 @@
 #include "column.h"
 #include <stdio.h>
-#include <stdio.h>
+#include <stdlib.h>
 
 enum enum_type{   
     /*Types for the columns*/
@@ -52,6 +52,14 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
         printf("Memory not allocated .");
         return NULL;
     }
+
+    /*
+    if (new_col->data == NULL || new_col->index == NULL) {
+        printf("Memory not allocated for data or index arrays.");
+        return NULL;
+    }
+    */
+
     return new_col;
 
 }
@@ -66,6 +74,34 @@ int insert_value(COLUMN *col, void *value){
         col->max_size += 256;
         col = (COLUMN*) realloc(col, col->max_size*sizeof(col->column_type));
     }
+
+    /*
+    To allocate memory for the new date inserted
+    col->data[col->size] = (COL_TYPE*)malloc(sizeof(COL_TYPE));
+    if (col->data[col->size] == NULL) {
+        printf("Memory not allocated for data element.");
+        return 0;
+    }
+
+    Chose the correct field to assign to the value inserted in COL_TYPE struct
+    switch(col->column_type) {
+        case UINT:
+            col->data[col->size]->uint_value = *((unsigned int*)value);
+            break;
+        case INT:
+            col->data[col->size]->int_value = *((int*)value);
+            break;
+        case CHAR:
+            col->data[col->size]->char_value = *((char*)value);
+            break;
+        case FLOAT:
+            col->data[col->size]->float_value = *((float*)value);
+            break;
+        case DOUBLE:
+            col->data[col->size]->double_value = *((double*)value);
+            break;
+            */
+
     //COL_TYPE temp = *value;
     col->data[col->size] = *value;
     col->size += 1;
