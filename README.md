@@ -14,5 +14,8 @@ Moved the definitions of COLUMN, ENUM_TYPE and COL_TYPE to be able to access the
 Corrected the function "insert value"
 Added the "destroy_col" function though I don't know if we should parkour the whole array to free each variable or not. To ask a teacher.
 Added a test column, will be useful when we have the display function.
+Corrected some docstring to make it more suitable and presentable.
+Updated column.h
+Adding "convert_to_str" function but not finished
 
 ### Raphaël

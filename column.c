@@ -22,7 +22,7 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
         return NULL;
     }
 
-    /*c
+    /* /!\ Explain please /!\
     if (new_col->data == NULL || new_col->index == NULL) {
         printf("Memory not allocated for data or index arrays.");
         return NULL;
@@ -80,8 +80,8 @@ int insert_value(COLUMN *col, void *value){
 
 void delete_column(COLUMN **col){
     /**
-     * @brief: Deletes col
-     * @col: THe column to be destroyed
+     * @brief: Free the space allocated by a column
+     * @col: Pointer to the column
      */
 
     free((*col)->title);
@@ -92,4 +92,58 @@ void delete_column(COLUMN **col){
     free(*col);
 
     *col = NULL;
+}
+
+void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
+    /**
+     * @brief Convert a value into a string
+     * @col: Pointer to the column
+     * @i: Position of the value in the data array
+     * @str: The string in which the value will be written
+     * @size:  Maximum size of the string
+     */
+    
+    switch(col->column_type){
+        case UINT:
+            unsigned int val = col->data[i];
+            int count = 0;
+            do{
+                str[count] = (char)val%10;
+                val /= 10;
+                count++;
+            } while(val > 10);
+            
+            char temp;  //We have to reverse it because it's in the wrong order. Didn't find better method
+            for (int j=0; j<=count/2; j++){
+                temp = str[0];
+                str[0] = str[count-1-j];
+                str[count-1-j] = temp;
+            }
+            str[count] = '\0';
+
+            break;
+        case INT:  
+            int val = col->data[i]; 
+            int count = 0;
+            if (val < 0){   // We prevent any problem with the '-' sign
+                str[count] = '-';
+                count++;
+                val = -val;
+            }
+            // Didn't find a better method for this
+
+            break;
+        case CHAR:
+            //Well it's already done
+            str = col->data[i];
+            break;
+        case FLOAT:
+            //Perhaps same as UNIT but by multiplying by 10 to take the decimal numbers with the %
+
+            break;
+        case DOUBLE:
+
+            break;
+    }
+
 }
