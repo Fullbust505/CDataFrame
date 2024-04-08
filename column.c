@@ -2,43 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-enum enum_type{   
-    /*Types for the columns*/
-    NULLVAL = 1 , UINT, INT, CHAR, FLOAT, DOUBLE, STRING, STRUCTURE
-};
-typedef enum enum_type ENUM_TYPE;
-
-union column_type{  
-    /*Types for the arrays of datas*/
-    unsigned int uint_value;
-    signed int int_value;
-    char char_value;
-    float float_value;
-    double double_value;
-    char* string_value;
-    void* struct_value;
-};
-typedef union column_type COL_TYPE ;
-
-
-struct column {
-    /**
-     * Structure of the columns
-     * 
-     */
-    char *title;
-    unsigned int size; //logical size
-    unsigned int max_size; //physical size
-    ENUM_TYPE column_type;
-    COL_TYPE **data; // array of pointers to stored data
-    unsigned long long int *index; // array of integers
-};
-typedef struct column COLUMN;
-
 COLUMN *create_column(ENUM_TYPE type, char *title){
     /**
-     * Creates a new column for a dataframe that will store the titles, types, sizes and indexes.
-     * 
+     * @brief: Creates a new column for a dataframe that will store the titles, types, sizes and indexes.
+     * @type: Column type
+     * @title: Column title
+     * @return: Pointer to the created array
      */
     COLUMN* new_col = (COLUMN*) malloc(sizeof(COLUMN));
     *new_col->title = *title;
@@ -53,7 +22,7 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
         return NULL;
     }
 
-    /*
+    /*c
     if (new_col->data == NULL || new_col->index == NULL) {
         printf("Memory not allocated for data or index arrays.");
         return NULL;
@@ -66,46 +35,61 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
 
 int insert_value(COLUMN *col, void *value){
     /**
-     * Inserts a value of void type in a column.
-     * 
+     * @brief: A value of void type in a column.
+     * @col: Pointer to the column
+     * @value:  Pointer to the value to insert
+     * @return: 1 if the value is correctly inserted, 0 otherwise
      */
     // Reallocation of the memory, in case there's not enough
     if (col->size == col->max_size){
         col->max_size += 256;
-        col = (COLUMN*) realloc(col, col->max_size*sizeof(col->column_type));
+        col->data = (COLUMN*) realloc(col->data, col->max_size*sizeof(col->column_type));
     }
 
-    /*
-    To allocate memory for the new date inserted
-    col->data[col->size] = (COL_TYPE*)malloc(sizeof(COL_TYPE));
-    if (col->data[col->size] == NULL) {
-        printf("Memory not allocated for data element.");
-        return 0;
-    }
-
-    Chose the correct field to assign to the value inserted in COL_TYPE struct
+    // Chose the correct field to assign to the value inserted in COL_TYPE struct
     switch(col->column_type) {
         case UINT:
-            col->data[col->size]->uint_value = *((unsigned int*)value);
+            *((unsigned int*)col->data[col->size]) = *((unsigned int*)value);
             break;
         case INT:
-            col->data[col->size]->int_value = *((int*)value);
+            *((int*)col->data[col->size]) = *((int*)value);
             break;
         case CHAR:
-            col->data[col->size]->char_value = *((char*)value);
+            *((char*)col->data[col->size]) = *((char*)value);
             break;
         case FLOAT:
-            col->data[col->size]->float_value = *((float*)value);
+            *((float*)col->data[col->size]) = *((float*)value);
             break;
         case DOUBLE:
-            col->data[col->size]->double_value = *((double*)value);
+            *((double*)col->data[col->size]) = *((double*)value);
             break;
-            */
+    }
+    // In case the NULL value has been entered, insert it anyways
+    if (value == NULL){
+        col->data[col->size] = NULL;
+    }
 
-    //COL_TYPE temp = *value;
-    col->data[col->size] = *value;
     col->size += 1;
     
-    if (col->data[col->size-1] == NULL) return 0;
+    if (col->data[col->size-1] == NULL){
+        printf("Memory not allocated.");
+        return 0;
+    } 
     else return 1;
+}
+
+void delete_column(COLUMN **col){
+    /**
+     * @brief: Deletes col
+     * @col: THe column to be destroyed
+     */
+
+    free((*col)->title);
+
+    free((*col)->index);
+    free((*col)->data);     // Perhaps do we have to free all the data one by one and parkour the whole array ? idk
+    
+    free(*col);
+
+    *col = NULL;
 }
