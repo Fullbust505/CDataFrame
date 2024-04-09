@@ -19,3 +19,6 @@ Updated column.h
 Adding "convert_to_str" function but not finished
 
 ### Raphaël
+
+Added switch case in the "insert_value" function to sort the value's location according to it's type
+Added an if statement in "create_column" to verify if the value has an index or a memory allocated
