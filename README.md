@@ -15,5 +15,4 @@ Other option to avoid time consuming methods : If we start from the end of str, 
 
 ### Raphaël
 
-Added switch case in the "insert_value" function to sort the value's location according to it's type
-Added an if statement in "create_column" to verify if the value has an index or a memory allocated
+Added a "display_value" and "print_column" function using the "convert_value" to print the value int the needed type

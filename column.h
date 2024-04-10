@@ -38,6 +38,8 @@ COLUMN *create_column(ENUM_TYPE type, char *title);
 int insert_value(COLUMN *col, void *value);
 void delete_column(COLUMN **col);
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
+void display_value(COLUMN **data_frame, int num_columns, int num_rows);
+void print_col(COLUMN *col);
 
 
 #endif

@@ -193,3 +193,30 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
     }
 
 }
+
+
+void display_value(COLUMN **data_frame, int num_columns, int num_rows) {
+    for (int i = 0; i < num_rows; i++) {
+        for (int j = 0; j < num_columns; j++) {
+            char str[256];
+            convert_value(data_frame[j], i, str, 256);
+            printf("%s\t", str);
+        }
+        printf("\n");
+    }
+}
+
+void print_col(COLUMN *col) {
+    printf("Column Title: %s\n", col->title);
+    printf("Index\tValue\n");
+    for (unsigned long long int i = 0; i < col->size; i++) {
+        printf("%llu\t", col->index[i]);
+        if (col->data[i] == NULL) {
+            printf("NULL\n");
+        } else {
+            char str[256];
+            convert_value(col, i, str, 256);
+            printf("%s\n", str);
+        }
+    }
+}
