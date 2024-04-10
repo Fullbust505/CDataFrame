@@ -103,47 +103,93 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
      * @size:  Maximum size of the string
      */
     
-    switch(col->column_type){
+    switch(col->column_type){       
         case UINT:
             unsigned int val = col->data[i];
-            int count = 0;
+            int length = 0; 
             do{
-                str[count] = (char)val%10;
+                str[length] = (char)val%10;
                 val /= 10;
-                count++;
+                length++;
             } while(val > 10);
+            str[length] = (char)val;
+            length++;
             
             char temp;  //We have to reverse it because it's in the wrong order. Didn't find better method
-            for (int j=0; j<=count/2; j++){
-                temp = str[0];
-                str[0] = str[count-1-j];
-                str[count-1-j] = temp;
+            for (int j=0; j<=length/2; j++){
+                temp = str[j];
+                str[j] = str[length-1-j];
+                str[length-1-j] = temp;
             }
-            str[count] = '\0';
+            str[length] = '\0';
 
             break;
         case INT:  
             int val = col->data[i]; 
-            int count = 0;
+            int length = 0;
             if (val < 0){   // We prevent any problem with the '-' sign
-                str[count] = '-';
-                count++;
-                val = -val;
+                str[length] = '-';
+                length++;
+                val = -val;   
             }
-            // Didn't find a better method for this
+            do{
+                str[length] = (char)val%10;
+                val /= 10;
+                length++;
+            } while(val > 10);
+            str[length] = (char)val;
+            length++;
+            
+            char temp;  
+            for (int j=1; j<=length/2; j++){
+                temp = str[j];
+                str[j] = str[length-j];
+                str[length-j] = temp;
+            }
+            str[length] = '\0';
 
             break;
         case CHAR:
             //Well it's already done
             str = col->data[i];
             break;
-        case FLOAT:
-            //Perhaps same as UNIT but by multiplying by 10 to take the decimal numbers with the %
-
-            break;
+        case FLOAT:     // Putting them next to each other applies the same algorithm for the 2 cases
         case DOUBLE:
+            float *val = col->data[i];
+            int length = 0; int decim = 0;
+            while (val/10 != 0){
+                decim++;
+                val *= 10;
+            }
+            val /= 10;  // Since we will go a step further, we have to roll back, couldn't think of a better method
+            decim--;
+
+            do{
+                if (length == 3){
+                    str[length] = ',';
+                    length++;
+                } else{
+                    str[length] = (char)val%10;
+                    val /= 10;
+                    length++;
+                }
+            } while(val > 10);
+            str[length] = (char)val;
+            length++;
+
+            char temp;  
+            for (int j=0; j<=length/2; j++){
+                temp = str[j];
+                str[j] = str[length-1-j];
+                str[length-1-j] = temp;
+            }
+            str[length] = '\0';
 
             break;
+
+        default :
+            str = NULL;
+            printf("convert_value encountered a type error.");
     }
 
 }

@@ -10,13 +10,8 @@ Not all functions return NULL pointers in case of a failure in their execution.
 
 ### Linus
 
-Moved the definitions of COLUMN, ENUM_TYPE and COL_TYPE to be able to access them in the main (otherwise, no test was possible).
-Corrected the function "insert value"
-Added the "destroy_col" function though I don't know if we should parkour the whole array to free each variable or not. To ask a teacher.
-Added a test column, will be useful when we have the display function.
-Corrected some docstring to make it more suitable and presentable.
-Updated column.h
-Adding "convert_to_str" function but not finished
+FINALLY finished the "convert_value" function THOUGH not sure if it works yet, we'll need the display function to test it.
+Other option to avoid time consuming methods : If we start from the end of str, it will be quicker (O(n) instead of higher) but dunno what happens if we have empty first cases for str. After some tests, it seems to not work, not 100% sure, check with teacher perhaps.
 
 ### Raphaël
 
