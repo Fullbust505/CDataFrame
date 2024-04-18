@@ -15,19 +15,12 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     new_col->max_size = 256;
     new_col->column_type = type;
     new_col->data = (COL_TYPE**) malloc(new_col->max_size*sizeof(COL_TYPE));
-    new_col->index = (unsigned long long int*) malloc(new_col->size*sizeof(unsigned long long int));
+    new_col->index = NULL; // For now, it's NULL, it's specified in the document
 
     if (new_col == NULL){
         printf("Memory not allocated .");
         return NULL;
     }
-
-    /* /!\ Explain please /!\
-    if (new_col->data == NULL || new_col->index == NULL) {
-        printf("Memory not allocated for data or index arrays.");
-        return NULL;
-    }
-    */
 
     return new_col;
 
@@ -43,33 +36,39 @@ int insert_value(COLUMN *col, void *value){
     // Reallocation of the memory, in case there's not enough
     if (col->size == col->max_size){
         col->max_size += 256;
-        col->data = (COLUMN*) realloc(col->data, col->max_size*sizeof(col->column_type));
+        col->data = (COL_TYPE**) realloc(col->data, col->max_size*sizeof(col->column_type));
     }
 
-    // Chose the correct field to assign to the value inserted in COL_TYPE struct
-    switch(col->column_type) {
-        case UINT:
-            *((unsigned int*)col->data[col->size]) = *((unsigned int*)value);
-            break;
-        case INT:
-            *((int*)col->data[col->size]) = *((int*)value);
-            break;
-        case CHAR:
-            *((char*)col->data[col->size]) = *((char*)value);
-            break;
-        case FLOAT:
-            *((float*)col->data[col->size]) = *((float*)value);
-            break;
-        case DOUBLE:
-            *((double*)col->data[col->size]) = *((double*)value);
-            break;
-    }
     // In case the NULL value has been entered, insert it anyways
     if (value == NULL){
         col->data[col->size] = NULL;
+    } else{
+        // Chose the correct field to assign to the value inserted in COL_TYPE struct
+        switch(col->column_type) {
+        case UINT:
+            col->data[col->size] = (unsigned int*) malloc (sizeof(unsigned int));
+            *((unsigned int*)col->data[col->size]) = *((unsigned int*)value);
+            break;
+        case INT:
+            col->data[col->size] = (int*) malloc (sizeof(int));
+            *((int*)col->data[col->size]) = *((int*)value);
+            break;
+        case CHAR:
+            col->data[col->size] = (char*) malloc (sizeof(char));
+            *((char*)col->data[col->size]) = *((char*)value);
+            break;
+        case FLOAT:
+            col->data[col->size] = (float*) malloc (sizeof(float));
+            *((float*)col->data[col->size]) = *((float*)value);
+            break;
+        case DOUBLE:
+            col->data[col->size] = (double*) malloc (sizeof(double));
+            *((double*)col->data[col->size]) = *((double*)value);
+            break;
+        }
     }
 
-    col->size += 1;
+    col->size++;
     
     if (col->data[col->size-1] == NULL){
         printf("Memory not allocated.");
@@ -105,86 +104,19 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
     
     switch(col->column_type){       
         case UINT:
-            unsigned int val = col->data[i];
-            int length = 0; 
-            do{
-                str[length] = (char)val%10;
-                val /= 10;
-                length++;
-            } while(val > 10);
-            str[length] = (char)val;
-            length++;
-            
-            char temp;  //We have to reverse it because it's in the wrong order. Didn't find better method
-            for (int j=0; j<=length/2; j++){
-                temp = str[j];
-                str[j] = str[length-1-j];
-                str[length-1-j] = temp;
-            }
-            str[length] = '\0';
-
+            snprintf(str, size, "%u", *((int*)col->data[i]));
             break;
         case INT:  
-            int val = col->data[i]; 
-            int length = 0;
-            if (val < 0){   // We prevent any problem with the '-' sign
-                str[length] = '-';
-                length++;
-                val = -val;   
-            }
-            do{
-                str[length] = (char)val%10;
-                val /= 10;
-                length++;
-            } while(val > 10);
-            str[length] = (char)val;
-            length++;
-            
-            char temp;  
-            for (int j=1; j<=length/2; j++){
-                temp = str[j];
-                str[j] = str[length-j];
-                str[length-j] = temp;
-            }
-            str[length] = '\0';
-
+            snprintf(str, size, "%d", *((unsigned int*)col->data[i]));
             break;
         case CHAR:
-            //Well it's already done
-            str = col->data[i];
+            snprintf(str, size, "%s", *((char*)col->data[i]));
             break;
-        case FLOAT:     // Putting them next to each other applies the same algorithm for the 2 cases
+        case FLOAT:     
+            snprintf(str, size, "%lf", *((float*)col->data[i]));
+            break;
         case DOUBLE:
-            float *val = col->data[i];
-            int length = 0; int decim = 0;
-            while (val/10 != 0){
-                decim++;
-                val *= 10;
-            }
-            val /= 10;  // Since we will go a step further, we have to roll back, couldn't think of a better method
-            decim--;
-
-            do{
-                if (length == 3){
-                    str[length] = ',';
-                    length++;
-                } else{
-                    str[length] = (char)val%10;
-                    val /= 10;
-                    length++;
-                }
-            } while(val > 10);
-            str[length] = (char)val;
-            length++;
-
-            char temp;  
-            for (int j=0; j<=length/2; j++){
-                temp = str[j];
-                str[j] = str[length-1-j];
-                str[length-1-j] = temp;
-            }
-            str[length] = '\0';
-
+            snprintf(str, size, "%lf", *((double*)col->data[i]));
             break;
 
         default :
@@ -196,6 +128,12 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
 
 
 void display_value(COLUMN **data_frame, int num_columns, int num_rows) {
+    /**
+     * @brief: Displays the value of the data frame
+     * @data_frame: The data frame 
+     * @num_columns: The number of columns of the data frame
+     * @num_rows: The number of rows in the data_frame
+     */
     for (int i = 0; i < num_rows; i++) {
         for (int j = 0; j < num_columns; j++) {
             char str[256];
@@ -207,6 +145,10 @@ void display_value(COLUMN **data_frame, int num_columns, int num_rows) {
 }
 
 void print_col(COLUMN *col) {
+    /**
+     * @brief : Prints a desired column
+     * @col : The column of the data frame
+     */
     printf("Column Title: %s\n", col->title);
     printf("Index\tValue\n");
     for (unsigned long long int i = 0; i < col->size; i++) {
@@ -220,3 +162,4 @@ void print_col(COLUMN *col) {
         }
     }
 }
+

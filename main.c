@@ -1,9 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "column.h"
 #define N 5
 
 int main(){
-    
     // Tests
     char str[5];
     COLUMN *mycol = create_column(INT, "My column");
@@ -12,6 +12,7 @@ int main(){
     insert_value(mycol, &b);
     insert_value(mycol, &c);
     insert_value(mycol, &d);
+    printf("TEST");
     convert_value(mycol, 2, str, N);
     printf("%s \n", str);
     delete_column(&mycol);
