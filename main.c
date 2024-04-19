@@ -12,9 +12,7 @@ int main(){
     insert_value(mycol, &b);
     insert_value(mycol, &c);
     insert_value(mycol, &d);
-    printf("TEST");
-    convert_value(mycol, 2, str, N);
-    printf("%s \n", str);
+    print_col(mycol);
     delete_column(&mycol);
 
     return 0;

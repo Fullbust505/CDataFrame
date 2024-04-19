@@ -10,7 +10,8 @@ Not all functions return NULL pointers in case of a failure in their execution.
 
 ### Linus
 
-Corrected the "convert_value" function
+Corrected the "insert_value" function
+Corrected the "print_col" function BUT I do not see the purpose of the index array so we're not gonna use it for now. When I know more about it, I'll change everything cuz for now we add value without updating the index attribute of the column
 
 ### Raphaël
 

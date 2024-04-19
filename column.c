@@ -46,23 +46,23 @@ int insert_value(COLUMN *col, void *value){
         // Chose the correct field to assign to the value inserted in COL_TYPE struct
         switch(col->column_type) {
         case UINT:
-            col->data[col->size] = (unsigned int*) malloc (sizeof(unsigned int));
+            col->data[col->size] = (COL_TYPE*) malloc (sizeof(unsigned int));
             *((unsigned int*)col->data[col->size]) = *((unsigned int*)value);
             break;
         case INT:
-            col->data[col->size] = (int*) malloc (sizeof(int));
+            col->data[col->size] = (COL_TYPE*) malloc (sizeof(int));
             *((int*)col->data[col->size]) = *((int*)value);
             break;
         case CHAR:
-            col->data[col->size] = (char*) malloc (sizeof(char));
+            col->data[col->size] = (COL_TYPE*) malloc (sizeof(char));
             *((char*)col->data[col->size]) = *((char*)value);
             break;
         case FLOAT:
-            col->data[col->size] = (float*) malloc (sizeof(float));
+            col->data[col->size] = (COL_TYPE*) malloc (sizeof(float));
             *((float*)col->data[col->size]) = *((float*)value);
             break;
         case DOUBLE:
-            col->data[col->size] = (double*) malloc (sizeof(double));
+            col->data[col->size] = (COL_TYPE*) malloc (sizeof(double));
             *((double*)col->data[col->size]) = *((double*)value);
             break;
         }
@@ -146,13 +146,14 @@ void display_value(COLUMN **data_frame, int num_columns, int num_rows) {
 
 void print_col(COLUMN *col) {
     /**
-     * @brief : Prints a desired column
-     * @col : The column of the data frame
+     * @brief: Prints a desired column
+     * @col: The column of the data frame
      */
     printf("Column Title: %s\n", col->title);
     printf("Index\tValue\n");
-    for (unsigned long long int i = 0; i < col->size; i++) {
-        printf("%llu\t", col->index[i]);
+    fflush(stdout);
+    for (unsigned long long int i = 0; i < (col->size); i++) {
+        printf("[%llu]\t", i);      // temp but works
         if (col->data[i] == NULL) {
             printf("NULL\n");
         } else {
@@ -161,5 +162,6 @@ void print_col(COLUMN *col) {
             printf("%s\n", str);
         }
     }
+    fflush(stdout);
 }
 
