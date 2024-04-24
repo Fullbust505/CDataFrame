@@ -169,7 +169,7 @@ int n_occ(COLUMN *col, void *x){
     switch (col->column_type){
         case UINT:
             for (int i=0; i<col->size; i++){
-                if (*((unsigned int*)col->data[col->size]) == *((unsigned int*)x)){
+                if (*((unsigned int*)col->data[i]) == *((unsigned int*)x)){
                     nb_occ += 1;
                 }
             }
@@ -177,7 +177,7 @@ int n_occ(COLUMN *col, void *x){
 
         case INT:
             for (int i=0; i<col->size; i++){
-                if (*((int*)col->data[col->size]) == *((int*)x)){
+                if (*((int*)col->data[i]) == *((int*)x)){
                     nb_occ += 1;
                 }
             }
@@ -185,7 +185,7 @@ int n_occ(COLUMN *col, void *x){
 
         case CHAR:
             for (int i=0; i<col->size; i++){
-                if (*((char*)col->data[col->size]) == *((char*)x)){
+                if (*((char*)col->data[i]) == *((char*)x)){
                     nb_occ += 1;
                 }
             }
@@ -193,7 +193,7 @@ int n_occ(COLUMN *col, void *x){
         
         case FLOAT:
             for (int i=0; i<col->size; i++){
-                if (*((float*)col->data[col->size]) == *((float*)x)){
+                if (*((float*)col->data[i]) == *((float*)x)){
                     nb_occ += 1;
                 }
             }
@@ -201,7 +201,7 @@ int n_occ(COLUMN *col, void *x){
         
         case DOUBLE:
             for (int i=0; i<col->size; i++){
-                if (*((double*)col->data[col->size]) == *((double*)x)){
+                if (*((double*)col->data[i]) == *((double*)x)){
                     nb_occ += 1;
                 }
             }
@@ -212,4 +212,23 @@ int n_occ(COLUMN *col, void *x){
     }
     
     return nb_occ;
+}
+
+void* n_pos(COLUMN *col, int x){
+    switch (col->column_type){
+    case UINT:
+        unsigned int *value = (*(unsigned int*)col->data[x]);
+        break;
+    case INT:
+        int *value = (*(int*)col->data[x]);
+    case CHAR:
+        char *value = (*(char*)col->data[x]);
+    case FLOAT:
+        float *value = (*(float**)col->data[x]);    // Not really sure of why we need a double pointer, there's an error otherwise
+    case DOUBLE:
+        double *value = (*(double**)col->data[x]);
+
+    default:
+        break;
+    }
 }
