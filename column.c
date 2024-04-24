@@ -126,7 +126,6 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
 
 }
 
-
 void display_value(COLUMN **data_frame, int num_columns, int num_rows) {
     /**
      * @brief: Displays the value of the data frame
@@ -165,3 +164,52 @@ void print_col(COLUMN *col) {
     fflush(stdout);
 }
 
+int n_occ(COLUMN *col, void *x){
+    int nb_occ = 0;
+    switch (col->column_type){
+        case UINT:
+            for (int i=0; i<col->size; i++){
+                if (*((unsigned int*)col->data[col->size]) == *((unsigned int*)x)){
+                    nb_occ += 1;
+                }
+            }
+            break;
+
+        case INT:
+            for (int i=0; i<col->size; i++){
+                if (*((int*)col->data[col->size]) == *((int*)x)){
+                    nb_occ += 1;
+                }
+            }
+            break;
+
+        case CHAR:
+            for (int i=0; i<col->size; i++){
+                if (*((char*)col->data[col->size]) == *((char*)x)){
+                    nb_occ += 1;
+                }
+            }
+            break;
+        
+        case FLOAT:
+            for (int i=0; i<col->size; i++){
+                if (*((float*)col->data[col->size]) == *((float*)x)){
+                    nb_occ += 1;
+                }
+            }
+            break;
+        
+        case DOUBLE:
+            for (int i=0; i<col->size; i++){
+                if (*((double*)col->data[col->size]) == *((double*)x)){
+                    nb_occ += 1;
+                }
+            }
+            break;
+
+        default:
+            break;
+    }
+    
+    return nb_occ;
+}

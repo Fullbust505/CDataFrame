@@ -11,9 +11,9 @@ Not all functions return NULL pointers in case of a failure in their execution.
 
 ### Linus
 
-Corrected the "insert_value" function
-Corrected the "print_col" function BUT I do not see the purpose of the index array so we're not gonna use it for now. When I know more about it, I'll change everything cuz for now we add value without updating the index attribute of the column
-Added files for the first deposit.
+Got my answer for the index issue, it will be used later apprently.
+Added the "n_occ" function (NOT TESTED YET /!\)
+Btw, I noticed that we did apply cases for columns of type CHAR but not of type STRING. So... we'll have to add it. Don't have the strength tonight.
 
 ### Raphaël
 
