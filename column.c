@@ -1,6 +1,7 @@
 #include "column.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 COLUMN *create_column(ENUM_TYPE type, char *title){
     /**
@@ -10,18 +11,19 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
      * @return: Pointer to the created array
      */
     COLUMN* new_col = (COLUMN*) malloc(sizeof(COLUMN));
-    *new_col->title = *title;
+    new_col->title = (char*) malloc(strlen(title) + 1);
+    strcpy(new_col->title, title);
     new_col->size = 0;
     new_col->max_size = 256;
     new_col->column_type = type;
     new_col->data = (COL_TYPE**) malloc(new_col->max_size*sizeof(COL_TYPE));
     new_col->index = NULL; // For now, it's NULL, it's specified in the document
 
-    if (new_col == NULL){
+    if (new_col->title == NULL){
         printf("Memory not allocated .");
         return NULL;
     }
-
+    strcpy(new_col->title, title);
     return new_col;
 
 }
@@ -64,6 +66,10 @@ int insert_value(COLUMN *col, void *value){
         case DOUBLE:
             col->data[col->size] = (COL_TYPE*) malloc (sizeof(double));
             *((double*)col->data[col->size]) = *((double*)value);
+            break;
+        case STRING:
+            col->data[col->size] = (COL_TYPE*) malloc (strlen((char*)value) + 1);
+            strcpy((char*)col->data[col->size], (char*)value);
             break;
         }
     }
@@ -118,7 +124,10 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
         case DOUBLE:
             snprintf(str, size, "%lf", *((double*)col->data[i]));
             break;
-
+        case STRING:
+            strncpy(str, (char*)col->data[i], size - 1);
+            str[size - 1] = '\0'; // Ensure null termination for the string to avoid errors
+            break;
         default :
             str = NULL;
             printf("convert_value encountered a type error.");

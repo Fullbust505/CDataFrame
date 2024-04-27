@@ -18,4 +18,5 @@ Btw, I noticed that we did apply cases for columns of type CHAR but not of type 
 
 ### Raphaël
 
-Added a "display_value" and "print_column" function using the "convert_value" to print the value in the needed type
+Tried to fix title issue for a new column.
+Added type STRING in the insert and convert value function.
