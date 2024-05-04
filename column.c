@@ -222,7 +222,7 @@ int n_occ(COLUMN *col, void *x){
     
     return nb_occ;
 }
-
+/*
 void* n_pos(COLUMN *col, int x){
     switch (col->column_type){
     case UINT:
@@ -241,3 +241,4 @@ void* n_pos(COLUMN *col, int x){
         break;
     }
 }
+*/

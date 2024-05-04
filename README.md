@@ -11,10 +11,8 @@ Not all functions return NULL pointers in case of a failure in their execution.
 
 ### Linus
 
-Got my answer for the index issue, it will be used later apprently.
-Added the "n_occ" function (NOT TESTED YET !!)
-Added the "n_pos" function (NOT TESTED YET !!)
-Btw, I noticed that we did apply cases for columns of type CHAR but not of type STRING. So... we'll have to add it. Don't have the strength tonight.
+All our prior functions work !
+We just have to correct the 2 or 3 last ones and then get to the dataframe.
 
 ### Raphaël
 
