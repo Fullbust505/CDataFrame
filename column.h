@@ -41,6 +41,9 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
 void display_value(COLUMN **data_frame, int num_columns, int num_rows);
 void print_col(COLUMN *col);
 int n_occ(COLUMN *col, void *x);
-void* n_pos(COLUMN *col, int x);
+COL_TYPE* get_value_at_position(COLUMN *col, unsigned long long int x);
+int count_values_greater_than_x(COLUMN *col, void *x);
+int count_values_less_than_x(COLUMN *col, void *x);
+int count_values_equal_to_x(COLUMN *col, void *x);
 
 #endif

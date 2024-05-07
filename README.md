@@ -16,5 +16,5 @@ We just have to correct the 2 or 3 last ones and then get to the dataframe.
 
 ### Raphaël
 
-Tried to fix title issue for a new column.
-Added type STRING in the insert and convert value function.
+All the necessary functions that were asked to be added in the project are present.
+We can now start the dataframe part of the project.
