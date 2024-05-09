@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "column.h"
+#include "cdataframe.h"
 #define N 5
 
 int main(){
@@ -14,6 +15,10 @@ int main(){
     insert_value(mycol, &d);
     print_col(mycol);
     delete_column(&mycol);
+
+    ENUM_TYPE cdftype [] = {INT,CHAR,INT};
+    CDATAFRAME *cdf = create_cdataframe(cdftype, 3);
+
 
     return 0;
 }

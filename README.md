@@ -11,8 +11,7 @@ Not all functions return NULL pointers in case of a failure in their execution.
 
 ### Linus
 
-All our prior functions work !
-We just have to correct the 2 or 3 last ones and then get to the dataframe.
+Added the list files. They are not a part of our job, they are given in the appendix of the project document.
 
 ### Raphaël
 
