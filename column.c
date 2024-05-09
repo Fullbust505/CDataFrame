@@ -116,7 +116,7 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
             snprintf(str, size, "%d", *((unsigned int*)col->data[i]));
             break;
         case CHAR:
-            snprintf(str, size, "%s", *((char*)col->data[i]));
+            snprintf(str, size, "%c", *((char*)col->data[i]));
             break;
         case FLOAT:     
             snprintf(str, size, "%lf", *((float*)col->data[i]));
@@ -142,11 +142,15 @@ void display_value(COLUMN **data_frame, int num_columns, int num_rows) {
      * @num_columns: The number of columns of the data frame
      * @num_rows: The number of rows in the data_frame
      */
-    for (int i = 0; i < num_rows; i++) {
+   for (int i = 0; i < num_rows; i++) {
         for (int j = 0; j < num_columns; j++) {
-            char str[256];
-            convert_value(data_frame[j], i, str, 256);
-            printf("%s\t", str);
+            if (i < data_frame[j]->size) { // Ensure index i is valid
+                char str[256];
+                convert_value(data_frame[j], i, str, sizeof(str));
+                printf("%s\t", str);
+            } else {
+                printf("\t"); // Print empty cell if index is out of bounds
+            }
         }
         printf("\n");
     }
@@ -173,72 +177,87 @@ void print_col(COLUMN *col) {
     fflush(stdout);
 }
 
-int n_occ(COLUMN *col, void *x){
+int n_occ(COLUMN *col, void *x) {
     int nb_occ = 0;
-    switch (col->column_type){
-        case UINT:
-            for (int i=0; i<col->size; i++){
-                if (*((unsigned int*)col->data[i]) == *((unsigned int*)x)){
-                    nb_occ += 1;
-                }
-            }
-            break;
-
-        case INT:
-            for (int i=0; i<col->size; i++){
-                if (*((int*)col->data[i]) == *((int*)x)){
-                    nb_occ += 1;
-                }
-            }
-            break;
-
-        case CHAR:
-            for (int i=0; i<col->size; i++){
-                if (*((char*)col->data[i]) == *((char*)x)){
-                    nb_occ += 1;
-                }
-            }
-            break;
-        
-        case FLOAT:
-            for (int i=0; i<col->size; i++){
-                if (*((float*)col->data[i]) == *((float*)x)){
-                    nb_occ += 1;
-                }
-            }
-            break;
-        
-        case DOUBLE:
-            for (int i=0; i<col->size; i++){
-                if (*((double*)col->data[i]) == *((double*)x)){
-                    nb_occ += 1;
-                }
-            }
-            break;
-
-        default:
-            break;
-    }
+    char x_str[256]; // Assuming the maximum size for the string representation
     
+    // Convert the value to a string for comparison
+    convert_value(col, 0, x_str, sizeof(x_str));
+
+    for (int i = 0; i < col->size; i++) {
+        char str[256];
+        convert_value(col, i, str, sizeof(str));
+
+        // Compare the string representations
+        if (strcmp(str, x_str) == 0) {
+            nb_occ++;
+        }
+    }
     return nb_occ;
 }
-/*
-void* n_pos(COLUMN *col, int x){
-    switch (col->column_type){
-    case UINT:
-        unsigned int *value = (*(unsigned int*)col->data[x]);
-        break;
-    case INT:
-        int *value = (*(int*)col->data[x]);
-    case CHAR:
-        char *value = (*(char*)col->data[x]);
-    case FLOAT:
-        float *value = (*(float**)col->data[x]);    // Not really sure of why we need a double pointer, there's an error otherwise
-    case DOUBLE:
-        double *value = (*(double**)col->data[x]);
 
-    default:
-        break;
+
+COL_TYPE* get_value_at_position(COLUMN *col, unsigned long long int x) {
+    if (x >= col->size) {
+        printf("Error: Index out of bounds.\n");
+        return NULL;
     }
+    return col->data[x];
 }
-*/
+
+int count_values_greater_than_x(COLUMN *col, void *x) {
+    int count = 0;
+    char x_str[256]; // Assuming the maximum size for the string representation
+    
+    // Convert the value to a string for comparison
+    convert_value(col, 0, x_str, sizeof(x_str));
+
+    for (int i = 0; i < col->size; i++) {
+        char str[256];
+        convert_value(col, i, str, sizeof(str));
+
+        // Compare the string representations
+        if (strcmp(str, x_str) > 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int count_values_less_than_x(COLUMN *col, void *x) {
+    int count = 0;
+    char x_str[256]; // Assuming the maximum size for the string representation
+    
+    // Convert the value to a string for comparison
+    convert_value(col, 0, x_str, sizeof(x_str));
+
+    for (int i = 0; i < col->size; i++) {
+        char str[256];
+        convert_value(col, i, str, sizeof(str));
+
+        // Compare the string representations
+        if (strcmp(str, x_str) < 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int count_values_equal_to_x(COLUMN *col, void *x) {
+    int count = 0;
+    char x_str[256]; // Assuming the maximum size for the string representation
+    
+    // Convert the value to a string for comparison
+    convert_value(col, 0, x_str, sizeof(x_str));
+
+    for (int i = 0; i < col->size; i++) {
+        char str[256];
+        convert_value(col, i, str, sizeof(str));
+
+        // Compare the string representations
+        if (strcmp(str, x_str) == 0) {
+            count++;
+        }
+    }
+    return count;
+}
