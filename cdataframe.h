@@ -20,5 +20,7 @@ void delete_column_cdf(CDATAFRAME *cdf, char *col_name);    // Name changed beac
 int get_cdf_cols_size(CDATAFRAME *cdf);
 void fill_input_cdf(CDATAFRAME *cdf, int nb_input);
 void fill_hard_cdf(CDATAFRAME *cdf, int nb_input);
+void display_cdf(CDATAFRAME cdf);
+void display_rows_cdf(CDATAFRAME cdf, unsigned long long int limit);
 
 #endif

@@ -4,7 +4,7 @@ project(CDataFrame VERSION 0.1.0 LANGUAGES C)
 include(CTest)
 enable_testing()
 
-add_executable(CDataFrame main.c column.c column.h)
+add_executable(CDataFrame main.c column.c column.h list.c list.h cdataframe.c cdataframe.h)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

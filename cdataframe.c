@@ -58,7 +58,9 @@ void fill_input_cdf(CDATAFRAME *cdf, int nb_input){
         return;
     }
 
-    LNODE* pointer = cdf->head;
+    LNODE* pointer = cdf->tail;
+    cdf->tail = pointer;
+    LNODE* prev;
     char title[50];
     int type_choice;
     for (int i=0; i<nb_input; i++){
@@ -71,44 +73,104 @@ void fill_input_cdf(CDATAFRAME *cdf, int nb_input){
         
         switch (type_choice){
             case 1 :
-                pointer->data = create_column(UINT, &title);
+                pointer->data = create_column(UINT, title);
             case 2 :
-                pointer->data = create_column(INT, &title);
+                pointer->data = create_column(INT, title);
             case 3 :
-                pointer->data = create_column(CHAR, &title);
+                pointer->data = create_column(CHAR, title);
             case 4 :
-                pointer->data = create_column(FLOAT, &title);
+                pointer->data = create_column(FLOAT, title);
             case 5 :
-                pointer->data = create_column(DOUBLE, &title);
+                pointer->data = create_column(DOUBLE, title);
             case 6 :
-                pointer->data = create_column(STRING, &title);
+                pointer->data = create_column(STRING, title);
         }
+        if (i != 0){
+            pointer->prev = prev;
+            prev->next = pointer;
+        } else{
+            pointer->prev = NULL;
+        }
+        prev = pointer;
         pointer = pointer->next;
     }
+    pointer->next = NULL;
+    cdf->head = pointer;
     return;
 }
 
 void fill_hard_cdf(CDATAFRAME *cdf, int nb_input){
-    LNODE* pointer = cdf->head;
+    LNODE* pointer = cdf->tail;
+    cdf->tail = pointer;
+    LNODE* prev;
     char title[50] = "Random fill";
     int type_choice;
     for (int i=0; i<nb_input; i++){
         type_choice = rand()%6 +1;
         switch (type_choice){
             case 1 :
-                pointer->data = create_column(UINT, &title);
+                pointer->data = create_column(UINT, title);
             case 2 :
-                pointer->data = create_column(INT, &title);
+                pointer->data = create_column(INT, title);
             case 3 :
-                pointer->data = create_column(CHAR, &title);
+                pointer->data = create_column(CHAR, title);
             case 4 :
-                pointer->data = create_column(FLOAT, &title);
+                pointer->data = create_column(FLOAT, title);
             case 5 :
-                pointer->data = create_column(DOUBLE, &title);
+                pointer->data = create_column(DOUBLE, title);
             case 6 :
-                pointer->data = create_column(STRING, &title);
+                pointer->data = create_column(STRING, title);
+        }
+        if (i != 0){
+            pointer->prev = prev;
+            prev->next = pointer;
+        } else{
+            pointer->prev = NULL;
+        }
+        prev = pointer;
+        pointer = pointer->next;
+    }
+    pointer->next = NULL;
+    cdf->head = pointer;
+    return;
+}
+
+void display_cdf(CDATAFRAME cdf){
+    LNODE* pointer = cdf.tail;
+    while (pointer != cdf.head){
+        print_col(pointer->data);
+        pointer = pointer->next;
+    }
+    return;
+}
+
+void display_rows_cdf(CDATAFRAME cdf, unsigned long long int limit){
+    LNODE* pointer = cdf.tail;
+    while (pointer != cdf.head){    // Yes, I just copied the print_col function and changed the for loop
+        printf("Column Title: %s\n", pointer->data->title);
+        printf("Index\tValue\n");
+        fflush(stdout);
+        for (unsigned long long int i = 0; i < limit; i++) {
+            printf("[%llu]\t", i);      // temp but works
+            if (pointer->data->data[i] == NULL) {
+                printf("NULL\n");
+            } else {
+                char str[256];
+                convert_value(pointer->data, i, str, 256);
+                printf("%s\n", str);
+            }
         }
         pointer = pointer->next;
     }
     return;
 }
+
+void display_col_cdf(CDATAFRAME cdf, int limit){
+    LNODE* pointer = cdf.tail;
+    while ((pointer != cdf.head) || (limit == 0)){
+        print_col(pointer->data);
+        pointer = pointer->next;
+        limit--;
+    }
+    return;
+}  

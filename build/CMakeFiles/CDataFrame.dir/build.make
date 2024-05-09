@@ -96,21 +96,53 @@ CMakeFiles/CDataFrame.dir/column.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CDataFrame.dir/column.c.s"
 	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\column.c" -o CMakeFiles\CDataFrame.dir\column.c.s
 
+CMakeFiles/CDataFrame.dir/list.c.obj: CMakeFiles/CDataFrame.dir/flags.make
+CMakeFiles/CDataFrame.dir/list.c.obj: C:/Users/linus/Documents/Working\ Stuff/Git\ Hub/EFREI_git/CDataFrame/list.c
+CMakeFiles/CDataFrame.dir/list.c.obj: CMakeFiles/CDataFrame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/CDataFrame.dir/list.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CDataFrame.dir/list.c.obj -MF CMakeFiles\CDataFrame.dir\list.c.obj.d -o CMakeFiles\CDataFrame.dir\list.c.obj -c "C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\list.c"
+
+CMakeFiles/CDataFrame.dir/list.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CDataFrame.dir/list.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\list.c" > CMakeFiles\CDataFrame.dir\list.c.i
+
+CMakeFiles/CDataFrame.dir/list.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CDataFrame.dir/list.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\list.c" -o CMakeFiles\CDataFrame.dir\list.c.s
+
+CMakeFiles/CDataFrame.dir/cdataframe.c.obj: CMakeFiles/CDataFrame.dir/flags.make
+CMakeFiles/CDataFrame.dir/cdataframe.c.obj: C:/Users/linus/Documents/Working\ Stuff/Git\ Hub/EFREI_git/CDataFrame/cdataframe.c
+CMakeFiles/CDataFrame.dir/cdataframe.c.obj: CMakeFiles/CDataFrame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/CDataFrame.dir/cdataframe.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CDataFrame.dir/cdataframe.c.obj -MF CMakeFiles\CDataFrame.dir\cdataframe.c.obj.d -o CMakeFiles\CDataFrame.dir\cdataframe.c.obj -c "C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\cdataframe.c"
+
+CMakeFiles/CDataFrame.dir/cdataframe.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CDataFrame.dir/cdataframe.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\cdataframe.c" > CMakeFiles\CDataFrame.dir\cdataframe.c.i
+
+CMakeFiles/CDataFrame.dir/cdataframe.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CDataFrame.dir/cdataframe.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\cdataframe.c" -o CMakeFiles\CDataFrame.dir\cdataframe.c.s
+
 # Object files for target CDataFrame
 CDataFrame_OBJECTS = \
 "CMakeFiles/CDataFrame.dir/main.c.obj" \
-"CMakeFiles/CDataFrame.dir/column.c.obj"
+"CMakeFiles/CDataFrame.dir/column.c.obj" \
+"CMakeFiles/CDataFrame.dir/list.c.obj" \
+"CMakeFiles/CDataFrame.dir/cdataframe.c.obj"
 
 # External object files for target CDataFrame
 CDataFrame_EXTERNAL_OBJECTS =
 
 CDataFrame.exe: CMakeFiles/CDataFrame.dir/main.c.obj
 CDataFrame.exe: CMakeFiles/CDataFrame.dir/column.c.obj
+CDataFrame.exe: CMakeFiles/CDataFrame.dir/list.c.obj
+CDataFrame.exe: CMakeFiles/CDataFrame.dir/cdataframe.c.obj
 CDataFrame.exe: CMakeFiles/CDataFrame.dir/build.make
 CDataFrame.exe: CMakeFiles/CDataFrame.dir/linkLibs.rsp
 CDataFrame.exe: CMakeFiles/CDataFrame.dir/objects1.rsp
 CDataFrame.exe: CMakeFiles/CDataFrame.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable CDataFrame.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\linus\Documents\Working Stuff\Git Hub\EFREI_git\CDataFrame\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable CDataFrame.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\CDataFrame.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

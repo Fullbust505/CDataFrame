@@ -522,6 +522,30 @@ CDataFrame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CDataFrame.dir\build.make CMakeFiles/CDataFrame.dir/build
 .PHONY : CDataFrame/fast
 
+cdataframe.obj: cdataframe.c.obj
+.PHONY : cdataframe.obj
+
+# target to build an object file
+cdataframe.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CDataFrame.dir\build.make CMakeFiles/CDataFrame.dir/cdataframe.c.obj
+.PHONY : cdataframe.c.obj
+
+cdataframe.i: cdataframe.c.i
+.PHONY : cdataframe.i
+
+# target to preprocess a source file
+cdataframe.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CDataFrame.dir\build.make CMakeFiles/CDataFrame.dir/cdataframe.c.i
+.PHONY : cdataframe.c.i
+
+cdataframe.s: cdataframe.c.s
+.PHONY : cdataframe.s
+
+# target to generate assembly for a file
+cdataframe.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CDataFrame.dir\build.make CMakeFiles/CDataFrame.dir/cdataframe.c.s
+.PHONY : cdataframe.c.s
+
 column.obj: column.c.obj
 .PHONY : column.obj
 
@@ -545,6 +569,30 @@ column.s: column.c.s
 column.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CDataFrame.dir\build.make CMakeFiles/CDataFrame.dir/column.c.s
 .PHONY : column.c.s
+
+list.obj: list.c.obj
+.PHONY : list.obj
+
+# target to build an object file
+list.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CDataFrame.dir\build.make CMakeFiles/CDataFrame.dir/list.c.obj
+.PHONY : list.c.obj
+
+list.i: list.c.i
+.PHONY : list.i
+
+# target to preprocess a source file
+list.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CDataFrame.dir\build.make CMakeFiles/CDataFrame.dir/list.c.i
+.PHONY : list.c.i
+
+list.s: list.c.s
+.PHONY : list.s
+
+# target to generate assembly for a file
+list.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CDataFrame.dir\build.make CMakeFiles/CDataFrame.dir/list.c.s
+.PHONY : list.c.s
 
 main.obj: main.c.obj
 .PHONY : main.obj
@@ -610,9 +658,15 @@ help:
 	@echo ... NightlyTest
 	@echo ... NightlyUpdate
 	@echo ... CDataFrame
+	@echo ... cdataframe.obj
+	@echo ... cdataframe.i
+	@echo ... cdataframe.s
 	@echo ... column.obj
 	@echo ... column.i
 	@echo ... column.s
+	@echo ... list.obj
+	@echo ... list.i
+	@echo ... list.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

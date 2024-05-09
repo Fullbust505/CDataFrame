@@ -1,5 +1,7 @@
-CMakeFiles/CDataFrame.dir/main.c.obj: \
- C:\Users\linus\Documents\Working\ Stuff\Git\ Hub\EFREI_git\CDataFrame\main.c \
+CMakeFiles/CDataFrame.dir/cdataframe.c.obj: \
+ C:\Users\linus\Documents\Working\ Stuff\Git\ Hub\EFREI_git\CDataFrame\cdataframe.c \
+ C:\Users\linus\Documents\Working\ Stuff\Git\ Hub\EFREI_git\CDataFrame\cdataframe.h \
+ C:\Users\linus\Documents\Working\ Stuff\Git\ Hub\EFREI_git\CDataFrame\column.h \
  c:\mingw\x86_64-w64-mingw32\include\stdio.h \
  c:\mingw\x86_64-w64-mingw32\include\corecrt_stdio_config.h \
  c:\mingw\x86_64-w64-mingw32\include\corecrt.h \
@@ -20,6 +22,4 @@ CMakeFiles/CDataFrame.dir/main.c.obj: \
  c:\mingw\x86_64-w64-mingw32\include\sec_api\stdlib_s.h \
  c:\mingw\x86_64-w64-mingw32\include\malloc.h \
  c:\mingw\lib\gcc\x86_64-w64-mingw32\11.2.0\include\mm_malloc.h \
- c:\mingw\x86_64-w64-mingw32\include\errno.h \
- C:\Users\linus\Documents\Working\ Stuff\Git\ Hub\EFREI_git\CDataFrame\column.h \
- C:\Users\linus\Documents\Working\ Stuff\Git\ Hub\EFREI_git\CDataFrame\cdataframe.h
+ c:\mingw\x86_64-w64-mingw32\include\errno.h

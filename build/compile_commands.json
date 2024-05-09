@@ -10,5 +10,17 @@
   "command": "C:\\MinGW\\bin\\gcc.exe   -g -o CMakeFiles\\CDataFrame.dir\\column.c.obj -c \"C:\\Users\\linus\\Documents\\Working Stuff\\Git Hub\\EFREI_git\\CDataFrame\\column.c\"",
   "file": "C:/Users/linus/Documents/Working Stuff/Git Hub/EFREI_git/CDataFrame/column.c",
   "output": "CMakeFiles/CDataFrame.dir/column.c.obj"
+},
+{
+  "directory": "C:/Users/linus/Documents/Working Stuff/Git Hub/EFREI_git/CDataFrame/build",
+  "command": "C:\\MinGW\\bin\\gcc.exe   -g -o CMakeFiles\\CDataFrame.dir\\list.c.obj -c \"C:\\Users\\linus\\Documents\\Working Stuff\\Git Hub\\EFREI_git\\CDataFrame\\list.c\"",
+  "file": "C:/Users/linus/Documents/Working Stuff/Git Hub/EFREI_git/CDataFrame/list.c",
+  "output": "CMakeFiles/CDataFrame.dir/list.c.obj"
+},
+{
+  "directory": "C:/Users/linus/Documents/Working Stuff/Git Hub/EFREI_git/CDataFrame/build",
+  "command": "C:\\MinGW\\bin\\gcc.exe   -g -o CMakeFiles\\CDataFrame.dir\\cdataframe.c.obj -c \"C:\\Users\\linus\\Documents\\Working Stuff\\Git Hub\\EFREI_git\\CDataFrame\\cdataframe.c\"",
+  "file": "C:/Users/linus/Documents/Working Stuff/Git Hub/EFREI_git/CDataFrame/cdataframe.c",
+  "output": "CMakeFiles/CDataFrame.dir/cdataframe.c.obj"
 }
 ]

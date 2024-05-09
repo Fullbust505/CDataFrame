@@ -12,8 +12,9 @@ Dataframe not finished.
 ### Linus
 
 Added the list files. They are not a part of our job, they are given in the appendix of the project document.
-Added functions to create, free and fill CDataFrame. Forgot the docstring.
+Added functions to create, free and fill CDataframe. Forgot the docstring. Added display functions for the CDataframe.
 Little optimization problem here : unfortunately, the "fill_input_cdf" has a big switch case. The reason is because a user cannot enter an ENUM_TYPE and we can't convert a string in an ENUM_TYPE except with a switch case, so... I had to do it. If you have something else, I'll gladly take it cuz now it's not very clean.
+Be aware that I didn't test any function, I am exhausted and don't have the faith to confront my errors. However, when building the project, I didn't encounter any major error.
 
 ### Raphaël
 
