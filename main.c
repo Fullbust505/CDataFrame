@@ -6,6 +6,8 @@
 
 int main(){
     // Tests
+
+    /* COLUMN TEST 
     char str[5];
     COLUMN *mycol = create_column(INT, "My column");
     int a = 52, b = 44, c = 15, d = 18;
@@ -15,10 +17,13 @@ int main(){
     insert_value(mycol, &d);
     print_col(mycol);
     delete_column(&mycol);
-
+    */
+    
     ENUM_TYPE cdftype [] = {INT,CHAR,INT};
     CDATAFRAME *cdf = create_cdf(cdftype, 3);
-
+    fill_input_cdf(cdf, 5);
+    display_cdf(*cdf);
+    delete_cdf(&cdf);
 
     return 0;
 }

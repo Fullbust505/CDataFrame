@@ -71,6 +71,8 @@ int insert_value(COLUMN *col, void *value){
             col->data[col->size] = (COL_TYPE*) malloc (strlen((char*)value) + 1);
             strcpy((char*)col->data[col->size], (char*)value);
             break;
+        default :
+            break;
         }
     }
 

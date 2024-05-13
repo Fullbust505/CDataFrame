@@ -3,7 +3,8 @@
 #include <stdlib.h>
 
 CDATAFRAME *create_cdf(ENUM_TYPE *cdftype, int size){
-    CDATAFRAME* cdf = (CDATAFRAME*) malloc(sizeof(CDATAFRAME)*size);
+    CDATAFRAME* cdf = (CDATAFRAME*) malloc(sizeof(cdftype)*size);
+    cdf->size = size;
     cdf->head = NULL;
     cdf->tail = NULL;
     return cdf;
@@ -26,12 +27,16 @@ void delete_column_cdf(CDATAFRAME *cdf, char *col_name){
     while (pointer->next != NULL){
         if (pointer->data->title == col_name){
             delete_column(&(pointer->data));
+            free(pointer);
+            cdf->size--;
             return;
         }
         pointer = pointer->next;
     }
     if (pointer->data->title == col_name){
         delete_column(&(pointer->data));
+        free(pointer);
+        cdf->size--;
         return;
     }
     printf("Error : column name given in parameter.\n");
@@ -60,7 +65,7 @@ void fill_input_cdf(CDATAFRAME *cdf, int nb_input){
 
     LNODE* pointer = cdf->tail;
     cdf->tail = pointer;
-    LNODE* prev;
+    LNODE* prev = NULL;
     char title[50];
     int type_choice;
     for (int i=0; i<nb_input; i++){
@@ -141,6 +146,7 @@ void display_cdf(CDATAFRAME cdf){
         print_col(pointer->data);
         pointer = pointer->next;
     }
+    print_col(pointer->data);
     return;
 }
 
@@ -167,10 +173,44 @@ void display_rows_cdf(CDATAFRAME cdf, unsigned long long int limit){
 
 void display_col_cdf(CDATAFRAME cdf, int limit){
     LNODE* pointer = cdf.tail;
-    while ((pointer != cdf.head) || (limit == 0)){
+    while ((pointer != cdf.head) || (limit != 0)){
         print_col(pointer->data);
         pointer = pointer->next;
         limit--;
     }
+    if ((pointer == cdf.head) && (limit != 0)){
+        print_col(pointer->data);
+    }
     return;
 }  
+
+void add_row_cdf(CDATAFRAME *cdf, int i){
+    LNODE* pointer = cdf->tail;
+
+    while (pointer != cdf->tail){
+        if (pointer->data->size == pointer->data->max_size){
+            pointer->data->max_size += 256;
+            pointer->data->data = (COL_TYPE**) realloc(pointer->data->data, pointer->data->max_size*sizeof(pointer->data->column_type));
+        }
+        for (int j=i; j<pointer->data->size; j++){
+            switch (pointer->data->column_type){
+            case UINT:
+                // TODO: create a temporary variable according to the type ? Had an error when I tried
+                break;
+            
+            default:
+                break;
+            }
+        }
+    }
+}
+
+void add_col_cdf(CDATAFRAME *cdf, ENUM_TYPE type,char *col_name){
+    // TODO : fix it ??? why tf is it not working ??
+    cdf->size++;
+    cdf = (CDATAFRAME*) realloc(cdf, cdf->size*sizeof(CDATAFRAME)); // We've put double pointers before for realloc, don't know if it's correct
+    LNODE *pointer = cdf->head;
+    //pointer->next = create_column(type, col_name);
+    cdf->head = pointer->next;
+    return;
+}
