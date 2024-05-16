@@ -1,19 +1,10 @@
 #include "column.h"
+#include "list.h"
 #ifndef CDATAFRAME_H
 #define CDATAFRAME_H
-typedef struct lnode_ {
-    COLUMN *data; // Pointer to a column, yes we changed its type
-    struct lnode_ *prev;
-    struct lnode_ *next;
-} LNODE;
 
-typedef struct list_ {
-    LNODE *head;
-    LNODE *tail;
-    int size;   // Added size attribute to keep a track on memory allocation;
-} LIST;
-
-typedef LIST CDATAFRAME;
+typedef list CDATAFRAME;
+typedef lnode LNODE;
 
 CDATAFRAME *create_cdf(ENUM_TYPE *cdftype, int size);
 void delete_cdf(CDATAFRAME **cdf);

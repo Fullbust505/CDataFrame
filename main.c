@@ -21,9 +21,9 @@ int main(){
     
     ENUM_TYPE cdftype [] = {INT,CHAR,INT};
     CDATAFRAME *cdf = create_cdf(cdftype, 3);
-    fill_input_cdf(cdf, 5);
+    fill_input_cdf(cdf, 2);
     display_cdf(*cdf);
     delete_cdf(&cdf);
-
+    
     return 0;
 }
