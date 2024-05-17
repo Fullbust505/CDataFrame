@@ -15,5 +15,4 @@ filling functions solved.
 
 ### Raphaël
 
-Tried to fix title issue for a new column.
-Added type STRING in the insert and convert value function.
+Added a fill_col function for a future fill_cdt function

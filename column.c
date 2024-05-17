@@ -262,3 +262,65 @@ int count_values_equal_to_x(COLUMN *col, void *x) {
     }
     return count;
 }
+
+void fill_col(COLUMN *col, int value) {
+      /**
+     * @brief: Fills the entire column with the specified value.
+     * @col: Pointer to the column
+     * @value: The value to fill the column with
+     */
+    for(int i = 0; i < col->max_size; i++) {
+        switch (col->column_type) {
+            case UINT:
+                col->data[i] = (COL_TYPE*) malloc(sizeof(unsigned int));
+                if (col->data[i] == NULL) {
+                    printf("Memory not allocated.");
+                    return;
+                }
+                *((unsigned int*)col->data[i]) = (unsigned int)value;
+                break;
+            case INT:
+                col->data[i] = (COL_TYPE*) malloc(sizeof(int));
+                if (col->data[i] == NULL) {
+                    printf("Memory not allocated.");
+                    return;
+                }
+                *((int*)col->data[i]) = (int)value;
+                break;
+            case CHAR:
+                col->data[i] = (COL_TYPE*) malloc(sizeof(char));
+                if (col->data[i] == NULL) {
+                    printf("Memory not allocated.");
+                    return;
+                }
+                *((char*)col->data[i]) = (char)value;
+                break;
+            case FLOAT:
+                col->data[i] = (COL_TYPE*) malloc(sizeof(float));
+                if (col->data[i] == NULL) {
+                    printf("Memory not allocated.");
+                    return;
+                }
+                *((float*)col->data[i]) = (float)value;
+                break;
+            case DOUBLE:
+                col->data[i] = (COL_TYPE*) malloc(sizeof(double));
+                if (col->data[i] == NULL) {
+                    printf("Memory not allocated.");
+                    return;
+                }
+                *((double*)col->data[i]) = (double)value;
+                break;
+            case STRING:
+                col->data[i] = (COL_TYPE*) malloc(strlen((char*)&value)+1);
+                if (col->data[i] == NULL) {
+                    printf("Memory not allocated.");
+                    return;
+                }
+                strcpy((char*)col->data[i], (char*)&value);
+                break;
+            default:
+                printf("Unsupported column type.");
+                return;
+    }
+}

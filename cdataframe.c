@@ -1,7 +1,6 @@
 #include "cdataframe.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 CDATAFRAME *create_cdf(ENUM_TYPE *cdftype, int size){
     /**
@@ -10,7 +9,7 @@ CDATAFRAME *create_cdf(ENUM_TYPE *cdftype, int size){
      * @size: Size of the dataframe
      * @return: Pointer to the CDataframe
      */
-    CDATAFRAME* cdf = (CDATAFRAME*) malloc(sizeof(cdftype)*size);
+    CDATAFRAME* cdf = (CDATAFRAME*) malloc(sizeof(CDATAFRAME);
     cdf->head = NULL;
     cdf->tail = NULL;
     return cdf;
@@ -23,7 +22,6 @@ void delete_cdf(CDATAFRAME **cdf){
      */
     lst_delete_list(*cdf);
     *cdf = NULL;
-    printf("CDF succesfully freed !");
 }
 
 void delete_column_cdf(CDATAFRAME *cdf, char *col_name){
@@ -42,7 +40,6 @@ void delete_column_cdf(CDATAFRAME *cdf, char *col_name){
         if (strcmp(pointer->data->title, col_name) == 0){
             delete_column(&(pointer->data));
             free(pointer);
-            cdf->size--;
             return;
         }
         pointer = pointer->next;
@@ -70,6 +67,11 @@ int get_cdf_cols_size(CDATAFRAME *cdf){
     return count;
 }
 
+void flush_input_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
 void fill_input_cdf(CDATAFRAME *cdf, int nb_input){
     /**
      * @brief: Fills a CDataframe according to the inputs of the user
@@ -82,84 +84,98 @@ void fill_input_cdf(CDATAFRAME *cdf, int nb_input){
     }
 
     LNODE* pointer = (LNODE*) malloc(sizeof(LNODE));
+    pointer = cdf->head;
     LNODE* prev = (LNODE*) malloc(sizeof(LNODE));
-    char title[20];
+    prev = NULL;
+    char title[50];
     int type_choice;
 
     for (int i=0; i<nb_input; i++){
         printf("Filling column number %d\n", i);
         printf("Enter the column's title : \n");
-        scanf("%s", &title);
+        fgets(title, sizeof(title), stdin); // Safer input handling with fgets
+        title[strcspn(title, "\n")] = '\0'; // Remove newline character
         printf("Please choose the column's type by entering their corresponding number (from 1 to 6)\n");
         printf("Usigned Int - Int - Char - Float - Double - String\n");
         scanf("%d", &type_choice);
-        
-        switch (type_choice){
-            case 1 :
-                pointer = lst_create_lnode(create_column(UINT, title));
+        COLUMN* new_col;
+        switch (type_choice) {
+            case 1:
+                new_col = create_column(UINT, title);
                 break;
-            case 2 :
-                pointer = lst_create_lnode(create_column(INT, title));
+            case 2:
+                new_col = create_column(INT, title);
                 break;
-            case 3 :
-                pointer = lst_create_lnode(create_column(CHAR, title));
+            case 3:
+                new_col = create_column(CHAR, title);
                 break;
-            case 4 :
-                pointer = lst_create_lnode(create_column(FLOAT, title));
+            case 4:
+                new_col = create_column(FLOAT, title);
                 break;
-            case 5 :
-                pointer = lst_create_lnode(create_column(DOUBLE, title));
+            case 5:
+                new_col = create_column(DOUBLE, title);
                 break;
-            case 6 :
-                pointer = lst_create_lnode(create_column(STRING, title));
+            case 6:
+                new_col = create_column(STRING, title);
                 break;
-            default :
+            default:
                 printf("Incorrect type input.");
-                break;
+                continue; // Skip to the next iteration
         }
-        print_col(pointer->data);
         if (i != 0){
             prev->next = pointer;
             pointer->prev = prev;
+            printf("Succes %d", i);
         } else{
             pointer->prev = NULL;
-            cdf->tail = pointer;
+            printf("Success 1");
         }
+        printf("Arrived");
         prev = pointer;
         pointer = pointer->next;
-        
+
+        if(pointer == NULL) {
+            pointer = malloc(sizeof(LNODE));
+            prev->next = pointer;
+            pointer->prev = prev;
+            pointer->next = NULL;
+        }
+        // Create a new node for the column
+        LNODE* node = lst_create_lnode(new_col);
+
+        // Insert the new node into the linked list
+        if (prev != NULL) {
+            prev->next = node;
+            node->prev = prev;
+        } else {
+            cdf->head = node;
+        }
+        prev = node;
     }
-    cdf->head = pointer;
-    printf("\n///////Finish///////////\n");
-    return;
+    cdf->tail = prev; // Update the tail pointer
 }
 
 void fill_hard_cdf(CDATAFRAME *cdf, int nb_input){
-    LNODE* pointer = (LNODE*) malloc(sizeof(LNODE));
-    LNODE* prev = (LNODE*) malloc(sizeof(LNODE));
-    char title[20];
+    LNODE* pointer = cdf->tail;
+    cdf->tail = pointer;
+    LNODE* prev;
+    char title[50] = "Random fill";
     int type_choice;
     for (int i=0; i<nb_input; i++){
         type_choice = rand()%6 +1;
         switch (type_choice){
             case 1 :
-                pointer = lst_create_lnode(create_column(UINT, title));
-                break;
+                pointer->data = create_column(UINT, title);
             case 2 :
-                pointer = lst_create_lnode(create_column(INT, title));
-                break;
+                pointer->data = create_column(INT, title);
             case 3 :
-                pointer = lst_create_lnode(create_column(CHAR, title));
-                break;
+                pointer->data = create_column(CHAR, title);
             case 4 :
-                pointer = lst_create_lnode(create_column(FLOAT, title));
-                break;
+                pointer->data = create_column(FLOAT, title);
             case 5 :
-                pointer = lst_create_lnode(create_column(DOUBLE, title));
-                break;
+                pointer->data = create_column(DOUBLE, title);
             case 6 :
-                pointer = lst_create_lnode(create_column(STRING, title));
-                break;
+                pointer->data = create_column(STRING, title);
         }
         if (i != 0){
             pointer->prev = prev;
