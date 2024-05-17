@@ -25,7 +25,6 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     }
     strcpy(new_col->title, title);
     return new_col;
-
 }
 
 int insert_value(COLUMN *col, void *value){

@@ -22,8 +22,10 @@ CMakeFiles/CDataFrame.dir/cdataframe.c.obj: C:/Users/linus/Documents/Working\ St
   C:/MinGW/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
   C:/MinGW/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
   C:/MinGW/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
+  C:/MinGW/x86_64-w64-mingw32/include/sec_api/string_s.h \
   C:/MinGW/x86_64-w64-mingw32/include/stdio.h \
   C:/MinGW/x86_64-w64-mingw32/include/stdlib.h \
+  C:/MinGW/x86_64-w64-mingw32/include/string.h \
   C:/MinGW/x86_64-w64-mingw32/include/swprintf.inl \
   C:/MinGW/x86_64-w64-mingw32/include/vadefs.h
 
@@ -54,6 +56,7 @@ CMakeFiles/CDataFrame.dir/column.c.obj: C:/Users/linus/Documents/Working\ Stuff/
   C:/MinGW/x86_64-w64-mingw32/include/vadefs.h
 
 CMakeFiles/CDataFrame.dir/list.c.obj: C:/Users/linus/Documents/Working\ Stuff/Git\ Hub/EFREI_git/CDataFrame/list.c \
+  C:/Users/linus/Documents/Working\ Stuff/Git\ Hub/EFREI_git/CDataFrame/column.h \
   C:/Users/linus/Documents/Working\ Stuff/Git\ Hub/EFREI_git/CDataFrame/list.h \
   C:/MinGW/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed/limits.h \
   C:/MinGW/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed/syslimits.h \
@@ -154,13 +157,13 @@ C:/MinGW/x86_64-w64-mingw32/include/string.h:
 
 C:/MinGW/x86_64-w64-mingw32/include/sec_api/stdlib_s.h:
 
+C:/MinGW/x86_64-w64-mingw32/include/sec_api/string_s.h:
+
 C:/MinGW/x86_64-w64-mingw32/include/stdlib.h:
 
 C:/MinGW/x86_64-w64-mingw32/include/vadefs.h:
 
 C:/Users/linus/Documents/Working\ Stuff/Git\ Hub/EFREI_git/CDataFrame/column.c:
-
-C:/MinGW/x86_64-w64-mingw32/include/sec_api/string_s.h:
 
 C:/Users/linus/Documents/Working\ Stuff/Git\ Hub/EFREI_git/CDataFrame/list.c:
 

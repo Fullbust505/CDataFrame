@@ -23,4 +23,5 @@ CMakeFiles/CDataFrame.dir/list.c.obj: \
  c:\mingw\x86_64-w64-mingw32\include\errno.h \
  c:\mingw\x86_64-w64-mingw32\include\string.h \
  c:\mingw\x86_64-w64-mingw32\include\sec_api\string_s.h \
- C:\Users\linus\Documents\Working\ Stuff\Git\ Hub\EFREI_git\CDataFrame\list.h
+ C:\Users\linus\Documents\Working\ Stuff\Git\ Hub\EFREI_git\CDataFrame\list.h \
+ C:\Users\linus\Documents\Working\ Stuff\Git\ Hub\EFREI_git\CDataFrame\column.h

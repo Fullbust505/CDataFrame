@@ -1,13 +1,15 @@
 #ifndef _LIST_H_
 #define _LIST_H_
 
+#include"column.h"
+
 // It's in French, cuz the code was provided in French. Blame them, not me.
 
 /**
 * Élément lnode
 */
 typedef struct lnode_ {
-    void *data;
+    COLUMN *data;
     struct lnode_ *prev;
     struct lnode_ *next;
 } lnode;
@@ -17,11 +19,12 @@ typedef struct lnode_ {
 typedef struct list_ {
     lnode *head;
     lnode *tail;
+    int size;
 } list;
 /**
 * création d'un noeud
 */
-lnode *lst_create_lnode(void *dat);
+lnode *lst_create_lnode(COLUMN *dat);
 /**
 * crée la liste et retourne un pointeur sur cette dernière
 */
