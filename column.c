@@ -263,7 +263,7 @@ int count_values_equal_to_x(COLUMN *col, void *x) {
     return count;
 }
 
-void fill_col(COLUMN *col, int value) {
+void fill_col(COLUMN *col, int value){
       /**
      * @brief: Fills the entire column with the specified value.
      * @col: Pointer to the column
@@ -322,5 +322,6 @@ void fill_col(COLUMN *col, int value) {
             default:
                 printf("Unsupported column type.");
                 return;
+        }
     }
 }

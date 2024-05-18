@@ -11,7 +11,7 @@ it works :D we fixed the goth girl.
 
 ### Linus
 
-filling functions solved.
+we can now add rows. Didn't test them though.
 
 ### Raphaël
 
