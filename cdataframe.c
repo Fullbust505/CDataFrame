@@ -222,7 +222,7 @@ void display_col_cdf(CDATAFRAME cdf, int limit){
 void add_row_cdf(CDATAFRAME *cdf, int i){
     LNODE* pointer = cdf->tail;
     if (cdf->tail == NULL){
-        printf("Adding row failed");
+        printf("Adding row failed\n");
     }
     while (pointer != NULL){
         if (i > pointer->data->max_size){   
@@ -235,12 +235,18 @@ void add_row_cdf(CDATAFRAME *cdf, int i){
         } else {
             memmove(&pointer->data->data[i+1] , &pointer->data->data[i], sizeof(pointer->data->column_type));
             pointer->data->data[i] = NULL;
+            pointer->data->size++;
         }
+        pointer = pointer->next;
     }
     return;
 }
 
 void add_col_cdf(CDATAFRAME *cdf, ENUM_TYPE type, char *col_name, int i){
+    if (i < 1){
+        printf("Adding col failed\n");
+        return;
+    }
     cdf->size++;
     cdf = (CDATAFRAME*) realloc(cdf, cdf->size*sizeof(CDATAFRAME)); // We've put double pointers before for realloc, don't know if it's correct
     LNODE *pointer = (LNODE*) malloc(sizeof(LNODE));
@@ -264,24 +270,54 @@ void add_col_cdf(CDATAFRAME *cdf, ENUM_TYPE type, char *col_name, int i){
             pointer = lst_create_lnode(create_column(STRING, col_name));
             break;
     }
-    if (cdf->size == i-1){
-        pointer->prev = cdf->tail;
-        cdf->tail->next = pointer;
-        cdf->tail = pointer;
-    } else if (i == 0){
-        pointer->next = cdf->head;
-        cdf->head->prev = pointer;
-        cdf->head = pointer;
-    } else {
+    if (i == 1){
+        lst_insert_tail(cdf, pointer);
+        return;
+    } if (cdf->size == i){
+        lst_insert_head(cdf, pointer);
+        return;
+    } if (0 < i < cdf->size + 1) {
         LNODE* tmp = cdf->tail;
-        while (i != 0){
+        while (i-1 != 0){
             tmp = tmp->next;
             i--;
         }
-        pointer->next = tmp;
-        pointer->prev = tmp->prev;
-        tmp->prev->next = pointer;
-        tmp->prev = pointer;
+        lst_insert_after(cdf, pointer, tmp);
+    }
+    return;
+}
+
+void delete_row_cdf(CDATAFRAME *cdf, int i){
+    LNODE* pointer = cdf->tail;
+    if (cdf->tail == NULL){
+        printf("Adding row failed\n");
+    }
+    while (pointer != NULL){    
+        memmove(&pointer->data->data[i] , &pointer->data->data[i+1], sizeof(pointer->data->column_type));
+        pointer->data->size++;
+        pointer = pointer->next;
+    }
+    return;
+}
+
+void delete_col_cdf(CDATAFRAME *cdf, int i){
+    LNODE *pointer = cdf->tail;
+    if (cdf->tail == NULL){
+        printf("Deleting col failed.\n");
+        return;
+    } if (i == 1){
+        lst_delete_tail(cdf);
+        return;
+    } if (cdf->size == i){
+        lst_delete_head(cdf);
+        return;
+    } if (0 < i < cdf->size + 1) {
+        LNODE* tmp = cdf->tail;
+        while (i-1 != 0){
+            tmp = tmp->next;
+            i--;
+        }
+        lst_delete_lnode(cdf, tmp);
     }
     return;
 }
