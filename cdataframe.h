@@ -6,7 +6,7 @@
 typedef list CDATAFRAME;
 typedef lnode LNODE;
 
-CDATAFRAME *create_cdf(ENUM_TYPE *cdftype, int size);
+CDATAFRAME *create_cdf(int size);
 void fill_input_cdf(CDATAFRAME *cdf, int nb_input);
 void fill_hard_cdf(CDATAFRAME *cdf, int nb_input);
 void delete_cdf(CDATAFRAME **cdf);

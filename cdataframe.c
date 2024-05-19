@@ -3,14 +3,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-CDATAFRAME *create_cdf(ENUM_TYPE *cdftype, int size){
+CDATAFRAME *create_cdf(int size){
     /**
      * @brief: Creates a new CDataframe
-     * @cdftype: idk ??
      * @size: Size of the dataframe
      * @return: Pointer to the CDataframe
      */
-    CDATAFRAME* cdf = (CDATAFRAME*) malloc(sizeof(cdftype)*size);
+    CDATAFRAME* cdf = (CDATAFRAME*) malloc(sizeof(CDATAFRAME)*size);
     cdf->head = NULL;
     cdf->tail = NULL;
     return cdf;
@@ -446,35 +445,35 @@ void display_col_names(CDATAFRAME cdf){
     return;
 }
 
-void display_num_rows(DataFrame *df){
+void display_num_rows(CDATAFRAME *cdf){
     /**
      * Get the number of rows in the dataframe.
-     * @param df Pointer to the dataframe struct.
+     * @param cdf Pointer to the dataframe struct.
      * @return Number of rows in the dataframe.
      */
-    printf("Number of rows: %d\n", df->num_rows);
+    printf("Number of rows: %d\n", cdf->num_rows);
 }
 
-void display_num_columns(DataFrame *df){
+void display_num_columns(CDATAFRAME *cdf){
     /**
      * Get the number of columns in the dataframe.
-     * @param df Pointer to the dataframe struct.
+     * @param cdf Pointer to the dataframe struct.
      * @return Number of columns in the dataframe.
      */
-    printf("Number of columns: %d\n", df->num_columns);
+    printf("Number of columns: %d\n", cdf->num_columns);
 }
 
-void display_num_cells_equal_to(DataFrame *df, int x){
+void display_num_cells_equal_to(CDATAFRAME *cdf, int x){
     /**
      * Get the count of cells equal to a given value in the dataframe.
-     * @param df Pointer to the dataframe struct.
+     * @param cdf Pointer to the dataframe struct.
      * @param x Value to compare with.
      * @return Number of cells equal to the given value.
      */
     int count = 0;
-    for (int i = 0; i < df->num_rows; i++) {
-        for (int j = 0; j < df->num_columns; j++) {
-            if (df->data[i][j] == x) {
+    for (int i = 0; i < cdf->num_rows; i++) {
+        for (int j = 0; j < cdf->num_columns; j++) {
+            if (cdf->data[i][j] == x) {
                 count++;
             }
         }
@@ -482,17 +481,17 @@ void display_num_cells_equal_to(DataFrame *df, int x){
     printf("Number of cells equal to %d: %d\n", x, count);
 }
 
-void display_num_cells_greater_than(DataFrame *df, int x){
+void display_num_cells_greater_than(CDATAFRAME *cdf, int x){
     /**
      * Get the count of cells containing a value greater than a given value in the dataframe.
-     * @param df Pointer to the dataframe struct.
+     * @param cdf Pointer to the dataframe struct.
      * @param x Value to compare with.
      * @return Number of cells containing a value greater than the given value.
      */
     int count = 0;
-    for (int i = 0; i < df->num_rows; i++) {
-        for (int j = 0; j < df->num_columns; j++) {
-            if (df->data[i][j] > x) {
+    for (int i = 0; i < cdf->num_rows; i++) {
+        for (int j = 0; j < cdf->num_columns; j++) {
+            if (cdf->data[i][j] > x) {
                 count++;
             }
         }
@@ -500,7 +499,7 @@ void display_num_cells_greater_than(DataFrame *df, int x){
     printf("Number of cells greater than %d: %d\n", x, count);
 }
 
-void display_num_cells_less_than(DataFrame *df, int x){
+void display_num_cells_less_than(CDATAFRAME *cdf, int x){
     /**
      * Get the count of cells containing a value less than a given value in the dataframe.
      * @param df Pointer to the dataframe struct.
@@ -508,9 +507,9 @@ void display_num_cells_less_than(DataFrame *df, int x){
      * @return Number of cells containing a value less than the given value.
      */
     int count = 0;
-    for (int i = 0; i < df->num_rows; i++) {
-        for (int j = 0; j < df->num_columns; j++) {
-            if (df->data[i][j] < x) {
+    for (int i = 0; i < cdf->num_rows; i++) {
+        for (int j = 0; j < cdf->num_columns; j++) {
+            if (cdf->data[i][j] < x) {
                 count++;
             }
         }

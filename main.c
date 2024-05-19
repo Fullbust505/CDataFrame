@@ -38,7 +38,7 @@ int main(){
 
     int choice;
     COLUMN *mycol = NULL;
-    CDATAFRAME *cdf = NULL;
+    CDATAFRAME *cdf = create_cdf();
 
     do {
         display_menu();
