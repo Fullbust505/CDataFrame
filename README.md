@@ -6,12 +6,14 @@ Here's a [link to our Github](https://github.com/Fullbust505/CDataFrame).
 ## Problems
 
 it works :D we fixed the goth girl.
+MORE FUNCTIONS STILL MOOOOOOOOOOOOOOOORRRRRRRRRREEEEEEEE
 
 ## Last changes
 
 ### Linus
 
-filling functions solved.
+we can now add rows. Didn't test them though.
+We can delete things now.
 
 ### Raphaël
 

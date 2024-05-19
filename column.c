@@ -111,10 +111,10 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
     
     switch(col->column_type){       
         case UINT:
-            snprintf(str, size, "%u", *((int*)col->data[i]));
+            snprintf(str, size, "%u", *((unsigned int*)col->data[i]));
             break;
         case INT:  
-            snprintf(str, size, "%d", *((unsigned int*)col->data[i]));
+            snprintf(str, size, "%d", *((int*)col->data[i]));
             break;
         case CHAR:
             snprintf(str, size, "%c", *((char*)col->data[i]));

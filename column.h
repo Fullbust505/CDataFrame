@@ -45,6 +45,7 @@ COL_TYPE* get_value_at_position(COLUMN *col, unsigned long long int x);
 int count_values_greater_than_x(COLUMN *col, void *x);
 int count_values_less_than_x(COLUMN *col, void *x);
 int count_values_equal_to_x(COLUMN *col, void *x);
-void fill_col(COLUMN *col, int val)
+void fill_col(COLUMN *col, int val);
+
 
 #endif
