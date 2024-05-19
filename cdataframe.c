@@ -445,6 +445,7 @@ void display_col_names(CDATAFRAME cdf){
     return;
 }
 
+<<<<<<< HEAD
 void display_num_rows(CDATAFRAME *cdf){
     /**
      * Get the number of rows in the dataframe.
@@ -475,12 +476,27 @@ void display_num_cells_equal_to(CDATAFRAME *cdf, int x){
         for (int j = 0; j < cdf->num_columns; j++) {
             if (cdf->data[i][j] == x) {
                 count++;
+=======
+void display_num_rows(list *lst){
+    if (lst == NULL || lst->head == NULL) {
+        printf("Number of rows: 0\n");
+        return;
+    }
+    int num_rows = 0;
+    lnode *current_node = lst->head;
+    while (current_node != NULL) {
+        if (current_node->data != NULL) {
+            if (current_node->data->size > num_rows) {
+                num_rows = current_node->data->size;
+>>>>>>> 46228f4325eb1aff1be4c5a34ccace630c3e7db8
             }
         }
+        current_node = current_node->next;
     }
-    printf("Number of cells equal to %d: %d\n", x, count);
+    printf("Number of rows: %d\n", num_rows);
 }
 
+<<<<<<< HEAD
 void display_num_cells_greater_than(CDATAFRAME *cdf, int x){
     /**
      * Get the count of cells containing a value greater than a given value in the dataframe.
@@ -495,10 +511,23 @@ void display_num_cells_greater_than(CDATAFRAME *cdf, int x){
                 count++;
             }
         }
+=======
+void display_num_columns(list *lst){
+    if (lst == NULL || lst->head == NULL) {
+        printf("Number of columns: 0\n");
+        return;
+>>>>>>> 46228f4325eb1aff1be4c5a34ccace630c3e7db8
     }
-    printf("Number of cells greater than %d: %d\n", x, count);
+    int num_columns = 0;
+    lnode *current_node = lst->head;
+    while (current_node != NULL) {
+        num_columns++;
+        current_node = current_node->next;
+    }
+    printf("Number of columns: %d\n", num_columns);
 }
 
+<<<<<<< HEAD
 void display_num_cells_less_than(CDATAFRAME *cdf, int x){
     /**
      * Get the count of cells containing a value less than a given value in the dataframe.
@@ -513,6 +542,55 @@ void display_num_cells_less_than(CDATAFRAME *cdf, int x){
                 count++;
             }
         }
+=======
+void display_num_cells_equal_to(list *lst, void *x){
+    if (lst == NULL || lst->head == NULL) {
+        printf("Number of cells equal to %p: 0\n", x);
+        return;
+>>>>>>> 46228f4325eb1aff1be4c5a34ccace630c3e7db8
     }
-    printf("Number of cells less than %d: %d\n", x, count);
+    int count = 0;
+    lnode *current_node = lst->head;
+    while (current_node != NULL) {
+        COLUMN *col = current_node->data;
+        if (col != NULL) {
+            count += count_values_equal_to_x(col, x);
+        }
+        current_node = current_node->next;
+    }
+    printf("Number of cells equal to %p: %d\n", x, count);
+}
+
+void display_num_cells_greater_than(list *lst, void *x){
+    if (lst == NULL || lst->head == NULL) {
+        printf("Number of cells greater than %p: 0\n", x);
+        return;
+    }
+    int count = 0;
+    lnode *current_node = lst->head;
+    while (current_node != NULL) {
+        COLUMN *col = current_node->data;
+        if (col != NULL) {
+            count += count_values_greater_than_x(col, x);
+        }
+        current_node = current_node->next;
+    }
+    printf("Number of cells greater than %p: %d\n", x, count);
+}
+
+void display_num_cells_less_than(list *lst, void *x){
+    if (lst == NULL || lst->head == NULL) {
+        printf("Number of cells less than %p: 0\n", x);
+        return;
+    }
+    int count = 0;
+    lnode *current_node = lst->head;
+    while (current_node != NULL) {
+        COLUMN *col = current_node->data;
+        if (col != NULL) {
+            count += count_values_less_than_x(col, x);
+        }
+        current_node = current_node->next;
+    }
+    printf("Number of cells less than %p: %d\n", x, count);
 }

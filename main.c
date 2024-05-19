@@ -184,14 +184,70 @@ int main(){
                 }
                 break;
             }
-            case 12:
+            case 12: { // Display Number of Rows
+                if (cdf == NULL) {
+                    printf("No dataframe created yet.\n");
+                } else {
+                    display_num_rows(cdf->list);
+                }
+                break;
+            }
+            case 13: { // Display Number of Columns
+                if (cdf == NULL) {
+                    printf("No dataframe created yet.\n");
+                } else {
+                    display_num_columns(cdf->list);
+                }
+                break;
+            }
+            case 14: { // Display Number of Cells Greater Than X
+                if (cdf == NULL) {
+                    printf("No dataframe created yet.\n");
+                } else {
+                    int value;
+                    printf("Enter value to compare: ");
+                    scanf("%d", &value);
+                    flush_input_buffer(); // Clear the input buffer
+
+                    display_num_cells_greater_than(cdf->list, &value);
+                }
+                break;
+            }
+            case 15: { // Display Number of Cells Less Than X
+                if (cdf == NULL) {
+                    printf("No dataframe created yet.\n");
+                } else {
+                    int value;
+                    printf("Enter value to compare: ");
+                    scanf("%d", &value);
+                    flush_input_buffer(); // Clear the input buffer
+
+                    display_num_cells_less_than(cdf->list, &value);
+                }
+                break;
+            }
+            case 16: { // Display Number of Cells Equal To X
+                if (cdf == NULL) {
+                    printf("No dataframe created yet.\n");
+                } else {
+                    int value;
+                    printf("Enter value to compare: ");
+                    scanf("%d", &value);
+                    flush_input_buffer(); // Clear the input buffer
+
+                    display_num_cells_equal_to(cdf->list, &value);
+                }
+                break;
+            }
+
+            case 17:
                 printf("Exiting program.\n");
                 break;
             default:
                 printf("Invalid option. Please try again.\n");
                 break;
         }
-    } while (choice != 12);
+    } while (choice != 17);
     // Clean up resources if not already done
     if (mycol != NULL) {
         delete_column(&mycol);
