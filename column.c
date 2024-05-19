@@ -178,7 +178,13 @@ void print_col(COLUMN *col) {
     fflush(stdout);
 }
 
-int n_occ(COLUMN *col, void *x) {
+int n_occ(COLUMN *col, void *x){
+    /**
+     * @brief Counts the occurrences of a specified value in a column.
+     * @param col Pointer to the column
+     * @param x Pointer to the value to count
+     * @return The number of occurrences of the value
+     */
     int nb_occ = 0;
     char x_str[256]; // Assuming the maximum size for the string representation
     
@@ -198,7 +204,13 @@ int n_occ(COLUMN *col, void *x) {
 }
 
 
-COL_TYPE* get_value_at_position(COLUMN *col, unsigned long long int x) {
+COL_TYPE* get_value_at_position(COLUMN *col, unsigned long long int x){
+    /**
+     * @brief Gets the value at a specific position in a column.
+     * @param col Pointer to the column
+     * @param x The position of the value
+     * @return Pointer to the value at the specified position
+     */
     if (x >= col->size) {
         printf("Error: Index out of bounds.\n");
         return NULL;
@@ -206,7 +218,13 @@ COL_TYPE* get_value_at_position(COLUMN *col, unsigned long long int x) {
     return col->data[x];
 }
 
-int count_values_greater_than_x(COLUMN *col, void *x) {
+int count_values_greater_than_x(COLUMN *col, void *x){
+    /**
+     * @brief Counts the values greater than a specified value in a column.
+     * @param col Pointer to the column
+     * @param x Pointer to the value to compare
+     * @return The number of values greater than the specified value
+     */
     int count = 0;
     char x_str[256]; // Assuming the maximum size for the string representation
     
@@ -225,7 +243,13 @@ int count_values_greater_than_x(COLUMN *col, void *x) {
     return count;
 }
 
-int count_values_less_than_x(COLUMN *col, void *x) {
+int count_values_less_than_x(COLUMN *col, void *x){
+    /**
+     * @brief Counts the values less than a specified value in a column.
+     * @param col Pointer to the column
+     * @param x Pointer to the value to compare
+     * @return The number of values less than the specified value
+     */
     int count = 0;
     char x_str[256]; // Assuming the maximum size for the string representation
     
@@ -244,7 +268,13 @@ int count_values_less_than_x(COLUMN *col, void *x) {
     return count;
 }
 
-int count_values_equal_to_x(COLUMN *col, void *x) {
+int count_values_equal_to_x(COLUMN *col, void *x){
+    /**
+     * @brief Counts the values equal to a specified value in a column.
+     * @param col Pointer to the column
+     * @param x Pointer to the value to compare
+     * @return The number of values equal to the specified value
+     */
     int count = 0;
     char x_str[256]; // Assuming the maximum size for the string representation
     

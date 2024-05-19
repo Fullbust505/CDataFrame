@@ -70,6 +70,14 @@ int get_cdf_cols_size(CDATAFRAME *cdf){
     return count;
 }
 
+void flush_input_buffer(){
+    /**
+     * @brief Flushes the input buffer
+     */
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
 void fill_input_cdf(CDATAFRAME *cdf, int nb_input){
     /**
      * @brief: Fills a CDataframe according to the inputs of the user
@@ -135,9 +143,16 @@ void fill_input_cdf(CDATAFRAME *cdf, int nb_input){
 }
 
 void fill_hard_cdf(CDATAFRAME *cdf, int nb_input){
-    LNODE* pointer = (LNODE*) malloc(sizeof(LNODE));
-    LNODE* prev = (LNODE*) malloc(sizeof(LNODE));
-    char title[20] = "col_hard";
+    /**
+     * @brief Fills a CDataframe with random data
+     * @param cdf Pointer to the CDataframe
+     * @param nb_input Number of columns to be created
+     */
+    LNODE* pointer = cdf->tail;
+    cdf->tail = pointer;
+    LNODE* prev;
+    char title[50] = "Random fill";
+
     int type_choice;
     for (int i=0; i<nb_input; i++){
         type_choice = rand()%6 +1;
@@ -176,6 +191,10 @@ void fill_hard_cdf(CDATAFRAME *cdf, int nb_input){
 }
 
 void display_cdf(CDATAFRAME cdf){
+    /**
+     * @brief Displays the CDataframe
+     * @param cdf CDataframe to be displayed
+     */
     LNODE* pointer = cdf.tail;
     while (pointer != cdf.head){
         print_col(pointer->data);
@@ -186,6 +205,11 @@ void display_cdf(CDATAFRAME cdf){
 }
 
 void display_rows_cdf(CDATAFRAME cdf, unsigned long long int limit){
+    /**
+     * @brief Displays the rows of the CDataframe
+     * @param cdf CDataframe to be displayed
+     * @param limit Maximum number of rows to display
+    */
     LNODE* pointer = cdf.tail;
     while (pointer != NULL){    // Yes, I just copied the print_col function and changed the for loop
         printf("Column Title: %s\n", pointer->data->title);
@@ -206,7 +230,12 @@ void display_rows_cdf(CDATAFRAME cdf, unsigned long long int limit){
     return;
 }
 
-void display_cols_cdf(CDATAFRAME cdf, int limit){
+void display_col_cdf(CDATAFRAME cdf, int limit){
+    /**
+     * @brief Displays the columns of the CDataframe
+     * @param cdf CDataframe to be displayed
+     * @param limit Maximum number of columns to display
+     */
     LNODE* pointer = cdf.tail;
     while ((pointer != cdf.head) || (limit != 0)){
         print_col(pointer->data);
