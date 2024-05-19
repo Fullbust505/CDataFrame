@@ -26,7 +26,7 @@ void delete_cdf(CDATAFRAME **cdf){
     printf("CDF succesfully freed !");
 }
 
-void delete_column_cdf(CDATAFRAME *cdf, char *col_name){
+void delete_col_name_cdf(CDATAFRAME *cdf, char *col_name){
     /**
      * @brief: Deletes a column of the CDF 
      * @cdf: Pointer to a CDataframe
@@ -206,7 +206,7 @@ void display_rows_cdf(CDATAFRAME cdf, unsigned long long int limit){
     return;
 }
 
-void display_col_cdf(CDATAFRAME cdf, int limit){
+void display_cols_cdf(CDATAFRAME cdf, int limit){
     LNODE* pointer = cdf.tail;
     while ((pointer != cdf.head) || (limit != 0)){
         print_col(pointer->data);
@@ -300,7 +300,7 @@ void delete_row_cdf(CDATAFRAME *cdf, int i){
     return;
 }
 
-void delete_col_cdf(CDATAFRAME *cdf, int i){
+void delete_col_i_cdf(CDATAFRAME *cdf, int i){
     LNODE *pointer = cdf->tail;
     if (cdf->tail == NULL){
         printf("Deleting col failed.\n");
@@ -318,6 +318,101 @@ void delete_col_cdf(CDATAFRAME *cdf, int i){
             i--;
         }
         lst_delete_lnode(cdf, tmp);
+    }
+    return;
+}
+
+void rename_col_cdf(CDATAFRAME *cdf, char *og_name, char *new_col_name){
+    if (cdf == NULL){
+        printf("Error : no elements in CDataFrame\n");
+        return;
+    }
+
+    LNODE* pointer = cdf->tail;
+    while (pointer != NULL){
+        if (strcmp(pointer->data->title, og_name) == 0){
+            strcpy(pointer->data->title, new_col_name);
+            free(pointer);
+            return;
+        }
+        pointer = pointer->next;
+    }
+    printf("Error : column name given in parameter.\n");
+    return;
+}
+
+void search_value_cdf(CDATAFRAME cdf, ENUM_TYPE type, COL_TYPE *value){
+    if (cdf.tail == NULL){
+        printf("Error : no elements in CDataframe\n");
+        return;
+    }
+    LNODE *pointer = cdf.tail;
+    int i=1; int exist = 1;
+    while (pointer != NULL){
+        if (pointer->data->column_type == type){
+            for (int j=0; j<pointer->data->size; j++){
+                if (pointer->data->data[j] == value){
+                    printf("Value found at position in column %d in row %d", i, j);
+                }
+            }
+        }
+        i++;
+        pointer = pointer->next;
+    }
+    if (exist == 1){
+        printf("Value not found in CDataframe : please verify the type and the value entered\n");
+        return;
+    }
+}
+
+COL_TYPE* get_value_cdf(CDATAFRAME cdf, int col, unsigned long long int row){
+    if (cdf.tail == NULL){
+        printf("Error : no elements in CDataframe\n");
+        return NULL;
+    } if (col > cdf.size){
+        printf("Error : col number too big\n");
+        return NULL;
+    }
+    LNODE* pointer = cdf.tail;
+    for (int i=1; i<col; i++){
+        pointer = pointer->next;
+    }
+    if (row > pointer->data->size){
+        printf("Error : row number too big\n");
+        return NULL;
+    }
+    return pointer->data->data[row];
+}
+
+void change_value_cdf(CDATAFRAME *cdf, int col, unsigned long long int row, COL_TYPE *value){
+    if (cdf->tail == NULL){
+        printf("Error : no elements in CDataframe\n");
+        return;
+    } if (col > cdf->size){
+        printf("Error : col number too big\n");
+        return;
+    }
+    LNODE* pointer = cdf->tail;
+    for (int i=1; i<col; i++){
+        pointer = pointer->next;
+    }
+    if (row > pointer->data->size){
+        printf("Error : row number too big\n");
+        return;
+    }
+    pointer->data->data[row] = value;
+    return;
+}
+
+void display_col_names(CDATAFRAME cdf){
+    if (cdf.tail == NULL){
+        printf("Error : no elements in CDataframe\n");
+        return;
+    }
+    LNODE *pointer = cdf.tail;
+    while (pointer != NULL){
+        printf("Column 1 : %s\n", pointer->data->title);
+        pointer = pointer->next;
     }
     return;
 }

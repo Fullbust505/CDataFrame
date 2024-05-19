@@ -6,6 +6,7 @@ Here's a [link to our Github](https://github.com/Fullbust505/CDataFrame).
 ## Problems
 
 it works :D we fixed the goth girl.
+MORE FUNCTIONS STILL MOOOOOOOOOOOOOOOORRRRRRRRRREEEEEEEE
 
 ## Last changes
 
