@@ -15,4 +15,4 @@ filling functions solved.
 
 ### Raphaël
 
-Added a fill_col function for a future fill_cdt function
+Added doctrings to many functions that didn't have any
