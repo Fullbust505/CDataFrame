@@ -445,3 +445,75 @@ void display_col_names(CDATAFRAME cdf){
     }
     return;
 }
+
+void display_num_rows(DataFrame *df){
+    /**
+     * Get the number of rows in the dataframe.
+     * @param df Pointer to the dataframe struct.
+     * @return Number of rows in the dataframe.
+     */
+    printf("Number of rows: %d\n", df->num_rows);
+}
+
+void display_num_columns(DataFrame *df){
+    /**
+     * Get the number of columns in the dataframe.
+     * @param df Pointer to the dataframe struct.
+     * @return Number of columns in the dataframe.
+     */
+    printf("Number of columns: %d\n", df->num_columns);
+}
+
+void display_num_cells_equal_to(DataFrame *df, int x){
+    /**
+     * Get the count of cells equal to a given value in the dataframe.
+     * @param df Pointer to the dataframe struct.
+     * @param x Value to compare with.
+     * @return Number of cells equal to the given value.
+     */
+    int count = 0;
+    for (int i = 0; i < df->num_rows; i++) {
+        for (int j = 0; j < df->num_columns; j++) {
+            if (df->data[i][j] == x) {
+                count++;
+            }
+        }
+    }
+    printf("Number of cells equal to %d: %d\n", x, count);
+}
+
+void display_num_cells_greater_than(DataFrame *df, int x){
+    /**
+     * Get the count of cells containing a value greater than a given value in the dataframe.
+     * @param df Pointer to the dataframe struct.
+     * @param x Value to compare with.
+     * @return Number of cells containing a value greater than the given value.
+     */
+    int count = 0;
+    for (int i = 0; i < df->num_rows; i++) {
+        for (int j = 0; j < df->num_columns; j++) {
+            if (df->data[i][j] > x) {
+                count++;
+            }
+        }
+    }
+    printf("Number of cells greater than %d: %d\n", x, count);
+}
+
+void display_num_cells_less_than(DataFrame *df, int x){
+    /**
+     * Get the count of cells containing a value less than a given value in the dataframe.
+     * @param df Pointer to the dataframe struct.
+     * @param x Value to compare with.
+     * @return Number of cells containing a value less than the given value.
+     */
+    int count = 0;
+    for (int i = 0; i < df->num_rows; i++) {
+        for (int j = 0; j < df->num_columns; j++) {
+            if (df->data[i][j] < x) {
+                count++;
+            }
+        }
+    }
+    printf("Number of cells less than %d: %d\n", x, count);
+}

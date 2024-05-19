@@ -17,4 +17,9 @@ We can delete things now.
 
 ### Raphaël
 
-Added doctrings to many functions that didn't have any
+Added functions that displays many things from the dataframe :
+-the number of rows in the dataframe.
+-the number of columns in the dataframe.
+-the number of cells in the dataframe that are equal to a given value x.
+-the number of cells in the dataframe that contain a value greater than x.
+-the number of cells in the dataframe that contain a value less than x.

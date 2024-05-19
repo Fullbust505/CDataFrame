@@ -151,7 +151,7 @@ int main(){
                     scanf("%d", &value);
                     flush_input_buffer(); // Clear the input buffer
 
-                    int count = count_values_greater_than_x(mycol, &value);
+                    int count = count_values_greater_than_x(mycol, value);
                     printf("Number of values greater than %d: %d\n", value, count);
                 }
                 break;
@@ -165,7 +165,7 @@ int main(){
                     scanf("%d", &value);
                     flush_input_buffer(); // Clear the input buffer
 
-                    int count = count_values_less_than_x(mycol, &value);
+                    int count = count_values_less_than_x(mycol, value);
                     printf("Number of values less than %d: %d\n", value, count);
                 }
                 break;
@@ -179,7 +179,7 @@ int main(){
                     scanf("%d", &value);
                     flush_input_buffer(); // Clear the input buffer
 
-                    int count = count_values_equal_to_x(mycol, &value);
+                    int count = count_values_equal_to_x(mycol, value);
                     printf("Number of values equal to %d: %d\n", value, count);
                 }
                 break;

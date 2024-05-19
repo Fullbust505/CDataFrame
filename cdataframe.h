@@ -28,7 +28,10 @@ void change_value_cdf(CDATAFRAME *cdf, int col, unsigned long long int row, COL_
 
 int get_cdf_cols_size(CDATAFRAME *cdf);
 
-
-
+void display_num_rows(struct DataFrame *df);
+void display_num_columns(struct DataFrame *df);
+void display_num_cells_equal_to(struct DataFrame *df, int x);
+void display_num_cells_greater_than(struct DataFrame *df, int x);
+void display_num_cells_less_than(struct DataFrame *df, int x);
 
 #endif
