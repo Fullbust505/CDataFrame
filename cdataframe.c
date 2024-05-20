@@ -196,11 +196,9 @@ void display_cdf(CDATAFRAME cdf){
      */
     LNODE* pointer = cdf.tail;
     while (pointer != NULL){
-        printf("Before print col\n");
         print_col(pointer->data);
         pointer = pointer->next;
     }
-    print_col(pointer->data);
     return;
 }
 
@@ -272,7 +270,7 @@ void add_row_cdf(CDATAFRAME *cdf, int i){
 }
 
 void add_col_cdf(CDATAFRAME *cdf, ENUM_TYPE type, char *col_name, int i){
-    if ((i < 1) || (i > cdf->size)){
+    if ((i < 1) || (i > cdf->size+1)){
         printf("Adding col failed\n");
         return;
     }

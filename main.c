@@ -11,13 +11,16 @@ void display_menu(){
     printf("2. Insert Value in Column\n");
     printf("3. Print Column\n");
     printf("4. Delete Column\n");
-    printf("6. Fill Dataframe with Input\n");
+    printf("5. Fill Dataframe with Input\n");
+    printf("6. Hard fill Dataframe\n");
     printf("7. Display Dataframe\n");
     printf("8. Delete Dataframe\n");
     printf("9. Count Values Greater Than X\n");
     printf("10. Count Values Less Than X\n");
     printf("11. Count Values Equal To X\n");
-    printf("12. Exit\n");
+    printf("12. Display the Dataframe's number of rows\n");
+    printf("13. Display the Dataframe's number of columns\n");
+    printf("14. Exit\n");
     printf("Choose an option: ");
 }
 
@@ -132,7 +135,7 @@ int main(){
                 }
                 break;
             }
-            case 6: {
+            case 5: {
                 if (cdf == NULL) {
                     printf("No dataframe created yet.\n");
                 } else {
@@ -147,6 +150,19 @@ int main(){
                 }
                 break;
             }
+            case 6 :
+                if (cdf == NULL){
+                    printf("No dataframe created yet.\n");
+                } else{
+                    int num_inputs;
+                    printf("Enter number of columns: ");
+                    scanf("%d", &num_inputs);
+                    flush_input_buffer(); // Clear the input buffer
+
+                    fill_hard_cdf(cdf, num_inputs);
+
+                    printf("Dataframe filled successfully.\n");
+                }
             case 7: {
                 if (cdf == NULL) {
                     printf("No dataframe created yet.\n");
@@ -165,46 +181,136 @@ int main(){
                 break;
             }
             case 9: {
-                if (mycol == NULL) {
+                if (cdf == NULL) {
                     printf("No column created yet.\n");
                 } else {
-                    int value;
+                    int type;
+                    printf("Please choose the value's type by entering their corresponding number (from 1 to 6)\n");
+                    printf("Usigned Int - Int - Char - Float - Double - String\n");
+                    scanf("%d", &type);
                     printf("Enter value to compare: ");
-                    scanf("%d", &value);
+                    switch(type){
+                        case 1:
+                            unsigned int ui_value;
+                            printf("Enter a value to enter : ");
+                            scanf("%u", ui_value);
+                            display_num_cells_greater_than(cdf,&ui_value);
+                            break;
+                        case INT:
+                            int i_value;
+                            scanf("%d", i_value);
+                            display_num_cells_greater_than(cdf,&i_value);                            break;
+                        case CHAR:
+                            char c_value;
+                            scanf("%c", c_value);
+                            display_num_cells_greater_than(cdf,&c_value);
+                            break;
+                        case FLOAT:
+                            float f_value;
+                            scanf("%f", &f_value);
+                            display_num_cells_greater_than(cdf,&f_value);
+                            break;
+                        case DOUBLE:
+                            double d_value;
+                            scanf("%ld", &d_value);
+                            display_num_cells_greater_than(cdf,&d_value);
+                            break;
+                        case STRING:
+                            char *s_value[50];
+                            scanf("%s", s_value);
+                            display_num_cells_greater_than(cdf, s_value);
+                            break;
+                    }
                     flush_input_buffer(); // Clear the input buffer
-
-                    int count = count_values_greater_than_x(mycol, &value);
-                    printf("Number of values greater than %d: %d\n", value, count);
                 }
-                break;
             }
             case 10: {
-                if (mycol == NULL) {
+                if (cdf == NULL) {
                     printf("No column created yet.\n");
                 } else {
-                    int value;
+                    int type;
+                    printf("Please choose the value's type by entering their corresponding number (from 1 to 6)\n");
+                    printf("Usigned Int - Int - Char - Float - Double - String\n");
+                    scanf("%d", &type);
                     printf("Enter value to compare: ");
-                    scanf("%d", &value);
+                    switch(type){
+                        case 1:
+                            unsigned int ui_value;
+                            printf("Enter a value to enter : ");
+                            scanf("%u", ui_value);
+                            display_num_cells_less_than(cdf,&ui_value);
+                            break;
+                        case INT:
+                            int i_value;
+                            scanf("%d", i_value);
+                            display_num_cells_less_than(cdf,&i_value);                            break;
+                        case CHAR:
+                            char c_value;
+                            scanf("%c", c_value);
+                            display_num_cells_less_than(cdf,&c_value);
+                            break;
+                        case FLOAT:
+                            float f_value;
+                            scanf("%f", &f_value);
+                            display_num_cells_less_than(cdf,&f_value);
+                            break;
+                        case DOUBLE:
+                            double d_value;
+                            scanf("%ld", &d_value);
+                            display_num_cells_less_than(cdf,&d_value);
+                            break;
+                        case STRING:
+                            char *s_value[50];
+                            scanf("%s", s_value);
+                            display_num_cells_less_than(cdf, s_value);
+                            break;
+                    }
                     flush_input_buffer(); // Clear the input buffer
-
-                    int count = count_values_less_than_x(mycol, &value);
-                    printf("Number of values less than %d: %d\n", value, count);
                 }
-                break;
             }
             case 11: {
-                if (mycol == NULL) {
+                if (cdf == NULL) {
                     printf("No column created yet.\n");
                 } else {
-                    int value;
+                    int type;
+                    printf("Please choose the value's type by entering their corresponding number (from 1 to 6)\n");
+                    printf("Usigned Int - Int - Char - Float - Double - String\n");
+                    scanf("%d", &type);
                     printf("Enter value to compare: ");
-                    scanf("%d", &value);
+                    switch(type){
+                        case 1:
+                            unsigned int ui_value;
+                            printf("Enter a value to enter : ");
+                            scanf("%u", ui_value);
+                            display_num_cells_equal_to(cdf,&ui_value);
+                            break;
+                        case INT:
+                            int i_value;
+                            scanf("%d", i_value);
+                            display_num_cells_equal_to(cdf,&i_value);                            break;
+                        case CHAR:
+                            char c_value;
+                            scanf("%c", c_value);
+                            display_num_cells_equal_to(cdf,&c_value);
+                            break;
+                        case FLOAT:
+                            float f_value;
+                            scanf("%f", &f_value);
+                            display_num_cells_equal_to(cdf,&f_value);
+                            break;
+                        case DOUBLE:
+                            double d_value;
+                            scanf("%ld", &d_value);
+                            display_num_cells_equal_to(cdf,&d_value);
+                            break;
+                        case STRING:
+                            char *s_value[50];
+                            scanf("%s", s_value);
+                            display_num_cells_equal_to(cdf, s_value);
+                            break;
+                    }
                     flush_input_buffer(); // Clear the input buffer
-
-                    int count = count_values_equal_to_x(mycol, &value);
-                    printf("Number of values equal to %d: %d\n", value, count);
                 }
-                break;
             }
             case 12: { // Display Number of Rows
                 if (cdf == NULL) {
@@ -222,54 +328,16 @@ int main(){
                 }
                 break;
             }
-            case 14: { // Display Number of Cells Greater Than X
-                if (cdf == NULL) {
-                    printf("No dataframe created yet.\n");
-                } else {
-                    int value;
-                    printf("Enter value to compare: ");
-                    scanf("%d", &value);
-                    flush_input_buffer(); // Clear the input buffer
-
-                    display_num_cells_greater_than(cdf, &value);
-                }
-                break;
-            }
-            case 15: { // Display Number of Cells Less Than X
-                if (cdf == NULL) {
-                    printf("No dataframe created yet.\n");
-                } else {
-                    int value;
-                    printf("Enter value to compare: ");
-                    scanf("%d", &value);
-                    flush_input_buffer(); // Clear the input buffer
-
-                    display_num_cells_less_than(cdf, &value);
-                }
-                break;
-            }
-            case 16: { // Display Number of Cells Equal To X
-                if (cdf == NULL) {
-                    printf("No dataframe created yet.\n");
-                } else {
-                    int value;
-                    printf("Enter value to compare: ");
-                    scanf("%d", &value);
-                    flush_input_buffer(); // Clear the input buffer
-
-                    display_num_cells_equal_to(cdf, &value);
-                }
-                break;
-            }
-
-            case 17:
+            case 14: {
                 printf("Exiting program.\n");
                 break;
+            }
             default:
                 printf("Invalid option. Please try again.\n");
                 break;
+            
         }
-    } while (choice != 17);
+    } while (choice != 14);
     // Clean up resources if not already done
     if (mycol != NULL) {
         delete_column(&mycol);
