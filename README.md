@@ -3,6 +3,31 @@
 Our L1 C Project. The objective is to create a library similar to Panda (of Python) but in C.
 Here's a [link to our Github](https://github.com/Fullbust505/CDataFrame).
 
+## Functionnalities (if it worked properly)
+
+Create a column
+Name the column
+Choose the type of values in the column
+Print the column
+Delete the column
+Add more columns
+Rename a column
+Delete the DataFrame to start over
+Add rows
+Delete rows
+Fill Dataframe with Input
+Hard fill Dataframe
+Display Dataframe
+Delete Dataframe
+Count Values Greater Than X
+Count Values Less Than X
+Count Values Equal To X
+Display the Dataframe's number of rows
+Display the Dataframe's number of columns
+Search a value in the dateframe
+Change a value in the dataframe
+
+
 ## Problems we faced during the project
 
 At first we just had a few issues because we made some mistake in the code written.
@@ -10,7 +35,7 @@ After a week we encountered a problem with naming our column when creating it, i
 We took a day or two to find the error in the functions and merged the branch "title_issue" with the main branch to work easily.
 
 After doing a overhaul of our CDATAFRAME structure to accomodate to our new functions that used simply linked lists, we had some issues when making our functions.
-But now, we are facing a big issue (with memory allocation we think), and so the program doesn't work anymore.
+But now, we are facing a big issue (with memory allocation we think), and so the program doesn't work anymore, damn it, just at the end we mess up...
 
 ## Step by step progression of the project
 
