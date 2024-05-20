@@ -12,7 +12,6 @@ We took a day or two to find the error in the functions and merged the branch "t
 After doing a overhaul of our CDATAFRAME structure to accomodate to our new functions that used simply linked lists, we had some issues when making our functions.
 But now, we are facing a big issue (with memory allocation we think), and so the program doesn't work anymore.
 
-
 ## Step by step progression of the project
 
 We firstly created a CMakeLists and the required files for the start of the project, as well as a backup for any futur prolblems.
@@ -36,6 +35,7 @@ And then we met big issues with memory allocation (at least we think it was that
 ## Last changes
 
 ### Linus
+
 All the differents commit since the start :
 
 Moved the definitions of COLUMN, ENUM_TYPE and COL_TYPE to be able to access them in the main (otherwise, no test was possible).
@@ -78,6 +78,7 @@ We can delete things now.
 Corrected many issues but it still doesn't work...
 
 ### Raphaël
+
 All the differents commit since the start :
 
 Added switch case in the "insert_value" function to sort the value's location according to it's type
