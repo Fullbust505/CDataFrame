@@ -217,7 +217,8 @@ int main(){
                         case INT:
                             int i_value;
                             scanf("%d", &i_value);
-                            display_num_cells_greater_than(cdf,&i_value);                            break;
+                            display_num_cells_greater_than(cdf,&i_value);
+                            break;
                         case CHAR:
                             char c_value;
                             scanf("%c", &c_value);
@@ -261,7 +262,8 @@ int main(){
                         case INT:
                             int i_value;
                             scanf("%d", &i_value);
-                            display_num_cells_less_than(cdf,&i_value);                            break;
+                            display_num_cells_less_than(cdf,&i_value);
+                            break;
                         case CHAR:
                             char c_value;
                             scanf("%c", &c_value);
@@ -305,7 +307,8 @@ int main(){
                         case INT:
                             int i_value;
                             scanf("%d", &i_value);
-                            display_num_cells_equal_to(cdf,&i_value);                            break;
+                            display_num_cells_equal_to(cdf,&i_value);
+                            break;
                         case CHAR:
                             char c_value;
                             scanf("%c", &c_value);
