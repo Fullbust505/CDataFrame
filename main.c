@@ -49,7 +49,7 @@ int main(){
                 ENUM_TYPE type = (ENUM_TYPE)type_choice;
 
                 int i = 0;
-                printf("Where do you want to add it ? (Enter index of column) : ");
+                printf("Where do you want to add it ? (Enter index of row) : ");
                 scanf("%d", &i);
                 add_col_cdf(cdf, type, title, i);
                 break;
@@ -61,7 +61,7 @@ int main(){
                     int i = 0;
                     printf("Where do you want to add your value ? (Enter column index) : ");
                     scanf("%d", &i);
-                    if ((i < 1) || (i > cdf->size)){
+                    if ((i < 1) || (i > cdf->size+1)){
                         printf("Index of column incorrect\n");
                         break;
                     }
@@ -73,7 +73,7 @@ int main(){
                     unsigned long long int j = 0;
                     printf("At which line do you want to add it ? (Enter row index) : ");
                     scanf("%llu", &j);
-                    if ((j < 0)||(j > pointer->data->size)){
+                    if ((j < 0)||(j > pointer->data->size +1)){
                         printf("Index of row incorrect\n");
                         break;
                     }
@@ -81,17 +81,16 @@ int main(){
                     switch(pointer->data->column_type){
                         case UINT:
                             unsigned int ui_value;
-                            printf("Enter a value to enter : ");
-                            scanf("%u", ui_value);
+                            scanf("%u", &ui_value);
                             insert_value(pointer->data, j, &ui_value);
                             break;
                         case INT:
                             int i_value;
-                            scanf("%d", i_value);
+                            scanf("%d", &i_value);
                             insert_value(pointer->data, j, &i_value);                            break;
                         case CHAR:
                             char c_value;
-                            scanf("%c", c_value);
+                            scanf("%c", &c_value);
                             insert_value(pointer->data, j, &c_value);
                             break;
                         case FLOAT:
@@ -109,6 +108,9 @@ int main(){
                             scanf("%s", s_value);
                             insert_value(pointer->data, j, s_value);
                             break;
+                        default:
+                            printf("An Error occured\n");
+                            break;
                     }
                     
                     flush_input_buffer(); // Clear the input buffer
@@ -122,7 +124,15 @@ int main(){
                 if (mycol == NULL) {
                     printf("No column created yet.\n");
                 } else {
-                    print_col(mycol);
+                    printf("Which column do you want to print ? (Enter index of column) : ");
+                    int col_choice;
+                    scanf("%d", &col_choice);
+                    
+                    LNODE *pointer = cdf->tail;
+                    while (col_choice-1 != 0){
+                        pointer = pointer->next;
+                    }
+                    print_col(pointer->data);
                 }
                 break;
             }
@@ -131,7 +141,15 @@ int main(){
                     delete_column(&mycol);
                     printf("Column deleted successfully.\n");
                 } else {
-                    printf("No column to delete.\n");
+                    printf("Which column do you want to delete ? (Enter index of column) : ");
+                    int col_choice;
+                    scanf("%d", &col_choice);
+                    
+                    LNODE *pointer = cdf->tail;
+                    while (col_choice-1 != 0){
+                        pointer = pointer->next;
+                    }
+                    delete_column(&pointer->data);
                 }
                 break;
             }
@@ -193,16 +211,16 @@ int main(){
                         case 1:
                             unsigned int ui_value;
                             printf("Enter a value to enter : ");
-                            scanf("%u", ui_value);
+                            scanf("%u", &ui_value);
                             display_num_cells_greater_than(cdf,&ui_value);
                             break;
                         case INT:
                             int i_value;
-                            scanf("%d", i_value);
+                            scanf("%d", &i_value);
                             display_num_cells_greater_than(cdf,&i_value);                            break;
                         case CHAR:
                             char c_value;
-                            scanf("%c", c_value);
+                            scanf("%c", &c_value);
                             display_num_cells_greater_than(cdf,&c_value);
                             break;
                         case FLOAT:
@@ -237,16 +255,16 @@ int main(){
                         case 1:
                             unsigned int ui_value;
                             printf("Enter a value to enter : ");
-                            scanf("%u", ui_value);
+                            scanf("%u", &ui_value);
                             display_num_cells_less_than(cdf,&ui_value);
                             break;
                         case INT:
                             int i_value;
-                            scanf("%d", i_value);
+                            scanf("%d", &i_value);
                             display_num_cells_less_than(cdf,&i_value);                            break;
                         case CHAR:
                             char c_value;
-                            scanf("%c", c_value);
+                            scanf("%c", &c_value);
                             display_num_cells_less_than(cdf,&c_value);
                             break;
                         case FLOAT:
@@ -281,16 +299,16 @@ int main(){
                         case 1:
                             unsigned int ui_value;
                             printf("Enter a value to enter : ");
-                            scanf("%u", ui_value);
+                            scanf("%u", &ui_value);
                             display_num_cells_equal_to(cdf,&ui_value);
                             break;
                         case INT:
                             int i_value;
-                            scanf("%d", i_value);
+                            scanf("%d", &i_value);
                             display_num_cells_equal_to(cdf,&i_value);                            break;
                         case CHAR:
                             char c_value;
-                            scanf("%c", c_value);
+                            scanf("%c", &c_value);
                             display_num_cells_equal_to(cdf,&c_value);
                             break;
                         case FLOAT:
