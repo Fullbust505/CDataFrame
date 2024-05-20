@@ -103,8 +103,10 @@ CMakeFiles/CDataFrame.dir/main.c.obj: C:/Users/linus/Documents/Working\ Stuff/Gi
   C:/MinGW/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
   C:/MinGW/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
   C:/MinGW/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
+  C:/MinGW/x86_64-w64-mingw32/include/sec_api/string_s.h \
   C:/MinGW/x86_64-w64-mingw32/include/stdio.h \
   C:/MinGW/x86_64-w64-mingw32/include/stdlib.h \
+  C:/MinGW/x86_64-w64-mingw32/include/string.h \
   C:/MinGW/x86_64-w64-mingw32/include/swprintf.inl \
   C:/MinGW/x86_64-w64-mingw32/include/vadefs.h
 

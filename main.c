@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "column.h"
 #include "cdataframe.h"
 #define N 5
@@ -10,7 +11,6 @@ void display_menu(){
     printf("2. Insert Value in Column\n");
     printf("3. Print Column\n");
     printf("4. Delete Column\n");
-    printf("5. Create Dataframe\n");
     printf("6. Fill Dataframe with Input\n");
     printf("7. Display Dataframe\n");
     printf("8. Delete Dataframe\n");
@@ -22,23 +22,10 @@ void display_menu(){
 }
 
 int main(){
-    // Tests
-
-    /* COLUMN TEST 
-    char str[5];
-    COLUMN *mycol = create_column(INT, "My column");
-    int a = 52, b = 44, c = 15, d = 18;
-    insert_value(mycol, &a);
-    insert_value(mycol, &b);
-    insert_value(mycol, &c);
-    insert_value(mycol, &d);
-    print_col(mycol);
-    delete_column(&mycol);
-    */
 
     int choice;
-    COLUMN *mycol = NULL;
-    CDATAFRAME *cdf = create_cdf();
+    COLUMN *mycol = create_column(INT, "test");
+    CDATAFRAME *cdf = create_cdf(50);
 
     do {
         display_menu();
@@ -52,24 +39,77 @@ int main(){
                 printf("Enter column title: ");
                 fgets(title, sizeof(title), stdin);
                 title[strcspn(title, "\n")] = '\0'; // Remove newline character
+                
                 printf("Enter column type (1: UINT, 2: INT, 3: CHAR, 4: FLOAT, 5: DOUBLE, 6: STRING): ");
                 scanf("%d", &type_choice);
                 flush_input_buffer(); // Clear the input buffer
                 ENUM_TYPE type = (ENUM_TYPE)type_choice;
-                mycol = create_column(type, title);
-                printf("Column created successfully.\n");
+
+                int i = 0;
+                printf("Where do you want to add it ? (Enter index of column) : ");
+                scanf("%d", &i);
+                add_col_cdf(cdf, type, title, i);
                 break;
             }
             case 2: {
-                if (mycol == NULL) {
+                if (cdf == NULL) {
                     printf("No column created yet.\n");
                 } else {
-                    int value;
+                    int i = 0;
+                    printf("Where do you want to add your value ? (Enter column index) : ");
+                    scanf("%d", &i);
+                    if ((i < 1) || (i > cdf->size)){
+                        printf("Index of column incorrect\n");
+                        break;
+                    }
+                    LNODE * pointer = cdf->tail;
+                    while (i-1 != 0){
+                        pointer = pointer->next;
+                    }
+                    
+                    unsigned long long int j = 0;
+                    printf("At which line do you want to add it ? (Enter row index) : ");
+                    scanf("%llu", &j);
+                    if ((j < 0)||(j > pointer->data->size)){
+                        printf("Index of row incorrect\n");
+                        break;
+                    }
                     printf("Enter value to insert: ");
-                    scanf("%d", &value);
+                    switch(pointer->data->column_type){
+                        case UINT:
+                            unsigned int ui_value;
+                            printf("Enter a value to enter : ");
+                            scanf("%u", ui_value);
+                            insert_value(pointer->data, j, &ui_value);
+                            break;
+                        case INT:
+                            int i_value;
+                            scanf("%d", i_value);
+                            insert_value(pointer->data, j, &i_value);                            break;
+                        case CHAR:
+                            char c_value;
+                            scanf("%c", c_value);
+                            insert_value(pointer->data, j, &c_value);
+                            break;
+                        case FLOAT:
+                            float f_value;
+                            scanf("%f", &f_value);
+                            insert_value(pointer->data, j, &f_value);
+                            break;
+                        case DOUBLE:
+                            double d_value;
+                            scanf("%ld", &d_value);
+                            insert_value(pointer->data, j, &d_value);
+                            break;
+                        case STRING:
+                            char *s_value[50];
+                            scanf("%s", s_value);
+                            insert_value(pointer->data, j, s_value);
+                            break;
+                    }
+                    
                     flush_input_buffer(); // Clear the input buffer
 
-                    insert_value(mycol, &value);
 
                     printf("Value inserted successfully.\n");
                 }
@@ -90,24 +130,6 @@ int main(){
                 } else {
                     printf("No column to delete.\n");
                 }
-                break;
-            }
-            case 5: {
-                int num_columns;
-                printf("Enter number of columns in the dataframe: ");
-                scanf("%d", &num_columns);
-                flush_input_buffer(); // Clear the input buffer
-
-                ENUM_TYPE cdftype[num_columns];
-                for (int i = 0; i < num_columns; i++) {
-                    printf("Enter type for column %d (1: UINT, 2: INT, 3: CHAR, 4: FLOAT, 5: DOUBLE, 6: STRING): ", i + 1);
-                    scanf("%d", &cdftype[i]);
-                    flush_input_buffer(); // Clear the input buffer
-                }
-
-                cdf = create_cdf(cdftype, num_columns);
-
-                printf("Dataframe created successfully.\n");
                 break;
             }
             case 6: {
@@ -151,7 +173,7 @@ int main(){
                     scanf("%d", &value);
                     flush_input_buffer(); // Clear the input buffer
 
-                    int count = count_values_greater_than_x(mycol, value);
+                    int count = count_values_greater_than_x(mycol, &value);
                     printf("Number of values greater than %d: %d\n", value, count);
                 }
                 break;
@@ -165,7 +187,7 @@ int main(){
                     scanf("%d", &value);
                     flush_input_buffer(); // Clear the input buffer
 
-                    int count = count_values_less_than_x(mycol, value);
+                    int count = count_values_less_than_x(mycol, &value);
                     printf("Number of values less than %d: %d\n", value, count);
                 }
                 break;
@@ -179,7 +201,7 @@ int main(){
                     scanf("%d", &value);
                     flush_input_buffer(); // Clear the input buffer
 
-                    int count = count_values_equal_to_x(mycol, value);
+                    int count = count_values_equal_to_x(mycol, &value);
                     printf("Number of values equal to %d: %d\n", value, count);
                 }
                 break;
@@ -188,7 +210,7 @@ int main(){
                 if (cdf == NULL) {
                     printf("No dataframe created yet.\n");
                 } else {
-                    display_num_rows(cdf->list);
+                    display_num_rows(cdf);
                 }
                 break;
             }
@@ -196,7 +218,7 @@ int main(){
                 if (cdf == NULL) {
                     printf("No dataframe created yet.\n");
                 } else {
-                    display_num_columns(cdf->list);
+                    display_num_columns(cdf);
                 }
                 break;
             }
@@ -209,7 +231,7 @@ int main(){
                     scanf("%d", &value);
                     flush_input_buffer(); // Clear the input buffer
 
-                    display_num_cells_greater_than(cdf->list, &value);
+                    display_num_cells_greater_than(cdf, &value);
                 }
                 break;
             }
@@ -222,7 +244,7 @@ int main(){
                     scanf("%d", &value);
                     flush_input_buffer(); // Clear the input buffer
 
-                    display_num_cells_less_than(cdf->list, &value);
+                    display_num_cells_less_than(cdf, &value);
                 }
                 break;
             }
@@ -235,7 +257,7 @@ int main(){
                     scanf("%d", &value);
                     flush_input_buffer(); // Clear the input buffer
 
-                    display_num_cells_equal_to(cdf->list, &value);
+                    display_num_cells_equal_to(cdf, &value);
                 }
                 break;
             }

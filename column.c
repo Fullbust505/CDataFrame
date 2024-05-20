@@ -27,10 +27,11 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     return new_col;
 }
 
-int insert_value(COLUMN *col, void *value){
+int insert_value(COLUMN *col, unsigned long long int i, void *value){
     /**
-     * @brief: A value of void type in a column.
+     * @brief: Adds a value of void type at the end of a column.
      * @col: Pointer to the column
+     * @i: Index of value
      * @value:  Pointer to the value to insert
      * @return: 1 if the value is correctly inserted, 0 otherwise
      */
@@ -40,35 +41,37 @@ int insert_value(COLUMN *col, void *value){
         col->data = (COL_TYPE**) realloc(col->data, col->max_size*sizeof(col->column_type));
     }
 
+    memmove(&col->data[i+1] , &col->data[i], sizeof(col->column_type));
+    
     // In case the NULL value has been entered, insert it anyways
     if (value == NULL){
-        col->data[col->size] = NULL;
+        col->data[i] = NULL;
     } else{
         // Chose the correct field to assign to the value inserted in COL_TYPE struct
         switch(col->column_type) {
         case UINT:
-            col->data[col->size] = (COL_TYPE*) malloc (sizeof(unsigned int));
-            *((unsigned int*)col->data[col->size]) = *((unsigned int*)value);
+            col->data[i] = (COL_TYPE*) malloc (sizeof(unsigned int));
+            *((unsigned int*)col->data[i]) = *((unsigned int*)value);
             break;
         case INT:
-            col->data[col->size] = (COL_TYPE*) malloc (sizeof(int));
-            *((int*)col->data[col->size]) = *((int*)value);
+            col->data[i] = (COL_TYPE*) malloc (sizeof(int));
+            *((int*)col->data[i]) = *((int*)value);
             break;
         case CHAR:
-            col->data[col->size] = (COL_TYPE*) malloc (sizeof(char));
-            *((char*)col->data[col->size]) = *((char*)value);
+            col->data[i] = (COL_TYPE*) malloc (sizeof(char));
+            *((char*)col->data[i]) = *((char*)value);
             break;
         case FLOAT:
-            col->data[col->size] = (COL_TYPE*) malloc (sizeof(float));
-            *((float*)col->data[col->size]) = *((float*)value);
+            col->data[i] = (COL_TYPE*) malloc (sizeof(float));
+            *((float*)col->data[i]) = *((float*)value);
             break;
         case DOUBLE:
-            col->data[col->size] = (COL_TYPE*) malloc (sizeof(double));
-            *((double*)col->data[col->size]) = *((double*)value);
+            col->data[i] = (COL_TYPE*) malloc (sizeof(double));
+            *((double*)col->data[i]) = *((double*)value);
             break;
         case STRING:
-            col->data[col->size] = (COL_TYPE*) malloc (strlen((char*)value) + 1);
-            strcpy((char*)col->data[col->size], (char*)value);
+            col->data[i] = (COL_TYPE*) malloc (strlen((char*)value) + 1);
+            strcpy((char*)col->data[i], (char*)value);
             break;
         default :
             break;
